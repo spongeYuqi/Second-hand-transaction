@@ -1,0 +1,53 @@
+var app = getApp();
+var db = wx.cloud.database();
+
+Page({
+      /**
+       * 页面的初始数据
+       */
+      data: {
+            list: [{
+                  title: '该程序是做什么的？',
+                  id: 0,
+                  des: ['本程序主要是面向校内的朋友发布自己的二手物品，促成交易，节省生活费。',
+                        
+                  ],
+                  check: true,
+            }, {
+                  title: '该程序收费吗？',
+                  id: 1,
+                  des: ['本程序是完全的公益项目，永久承诺不收取任何中间费，您可以按照相关规定发布自己商品或需求。'],
+                  check: false,
+            }, {
+                  title: '为什么要留下联系方式？',
+                  id: 2,
+                  des: ['本程序交易完全由交易双方沟通，此小程序纯粹提供一个二手交易的线上环境。', '除非程序出现问题导致交易故障，平台不参与任何交易。'],
+                  check: false,
+            },  ]
+      },
+      onReady() {},
+
+      show(e) {
+            var that = this;
+            let ite = e.currentTarget.dataset.show;
+            let list = that.data.list;
+            if (!ite.check) {
+                  list[ite.id].check = true;
+            } else {
+                  list[ite.id].check = false;
+            }
+            that.setData({
+                  list: list
+            })
+      },
+      //跳转页面
+      go(e) {
+            wx.navigateTo({
+                  url: e.currentTarget.dataset.go
+            })
+      },
+      onLoad() {
+
+      },
+
+})

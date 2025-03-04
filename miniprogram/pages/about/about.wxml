@@ -1,0 +1,42 @@
+<view class="top_contain">
+      <view class="des_contain">
+            <view class="name">周宇骐</view>
+            <view class="sign">蓝天白云，寂寂惺惺</view>
+      </view>
+      <view class="avator_box">
+            <image class="avator" src="/images/touxiang.jpg"></image>
+      </view>
+</view>
+<view class="contain">
+      <view class="title">简介</view>
+      <view class="description">
+            <text space="emsp" decode="{{ true }}">{{des}}</text>
+      </view>
+      <view class="title">联系方式</view>
+      <view class="description">
+            <view class="tip" bindtap="copy" data-copy="https://spongebob.vip/en" data-name="链接">
+                  <view>个人网站</view>:
+                  <text>https://spongebob.vip/en</text>
+            </view>
+            <view class="tip" bindtap="copy" data-copy="https://github.com/spongeYuqi" data-name="链接">
+                  <view>Github</view>:
+                  <text>https://github.com/spongeYuqi</text>
+            </view>
+            <view class="tip" bindtap="copy" data-copy="憨憨burg" data-name="B站">
+                  <view>B站</view>:
+                  <text>憨憨burg</text>
+            </view>
+            <view class="tip" bindtap="copy" data-copy="芥泥糖" data-name="网易云音乐">
+                  <view>网易云音乐</view>:
+                  <text>芥泥糖</text>
+            </view>
+            <view class="tip" bindtap="copy" data-copy="芥泥糖" data-name="公众号">
+                  <view>公众号</view>:
+                  <text>芥泥糖</text>
+            </view>
+            <view class="tip" bindtap="copy" data-copy="NECAxiaoqq" data-name="微信号">
+                  <view>微信号</view>:
+                  <text>NECAxiaoqq</text>
+            </view>
+      </view>
+</view>
