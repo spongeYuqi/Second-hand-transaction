@@ -9,7 +9,7 @@ Page({
        */
       data: {
             scrollTop: 0,
-            newlist: [],
+            //newlist: [],
             list: [],
             key: '',
             blank: false,
@@ -17,7 +17,7 @@ Page({
             nomore:false,
       },
       onLoad: function(options) {
-            this.gethis();
+            // this.gethis();
             this.getnew();
       },
       //获取本地记录
@@ -42,25 +42,7 @@ Page({
             this.data.key = e.currentTarget.dataset.key;
             this.search('his');
       },
-      //最新推荐书籍
-      getnew() {
-            let that = this;
-            db.collection('publish').where({
-                  status: 0,
-                  dura: _.gt(new Date().getTime()),
-            }).orderBy('creat', 'desc').get({
-                  success: function(res) {
-                        let newlist = res.data;
-                        //限定5个推荐内容
-                        if (newlist.length > 5) {
-                              newlist.length = 5;
-                        }
-                        that.setData({
-                              newlist: newlist,
-                        })
-                  }
-            })
-      },
+      
       //跳转详情
       detail(e) {
             let that = this;
