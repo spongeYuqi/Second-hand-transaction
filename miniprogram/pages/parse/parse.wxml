@@ -8,12 +8,7 @@
                   </view>
                   <view class="box1_2">单位（元）</view>
             </view>
-            <view class="box2">
-                  <view class="box2_1">
-                        <view class="box2_1_1" catchtap="go" data-go="/pages/recharge/recharge">充值</view>
-                        <view class="box2_1_2" catchtap="go" data-go="/pages/reflect/reflect">提现</view>
-                  </view>
-            </view>
+            
       </view>
 </view>
 

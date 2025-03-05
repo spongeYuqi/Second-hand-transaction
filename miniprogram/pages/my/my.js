@@ -15,6 +15,16 @@ Page({
             })
       },
       go(e) {
+        const target = e.currentTarget.dataset.go;
+        // 检查是否为"我的收藏"或"我的积分"
+        if (target === '/pages/order/list/list' || target === '/pages/parse/parse') {
+          wx.showToast({
+            title: '待开发中',
+            icon: 'none',
+            duration: 1000
+          });
+          return; // 结束函数执行，避免继续运行下面的代码
+        }
             if (e.currentTarget.dataset.status == '1') {
                   if (!app.openid) {
                         wx.showModal({

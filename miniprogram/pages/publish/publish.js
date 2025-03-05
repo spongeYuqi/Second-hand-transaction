@@ -11,17 +11,36 @@ Page({
             college: JSON.parse(config.data).college.splice(1),
             steps: [{
                         text: '步骤一',
-                        desc: '选取标签'
+                        desc: '扫描isbn码'
                   },
                   {
                         text: '步骤二',
-                        desc: '补充具体信息'
+                        desc: '补充图书信息'
                   },
                   {
                         text: '步骤三',
                         desc: '发布成功'
                   },
             ],
+            categories: [
+              { name: '书籍资料', days: 60 },
+              { name: '学习用具', days: 60 },
+              { name: '数码产品', days: 45 },
+              { name: '衣物配饰', days: 45 },
+              { name: '运动器材', days: 45 },
+              { name: '寝具用品', days: 45 },
+              { name: '委托合作', days: 3 },
+              { name: '其他', days: 30 }
+            ],
+            selectedCategory: '', // 存储用户选择的类别
+            isProductOrDemand: '', // 存储用户选择的商品或需求
+            dura: 0, // 根据选择自动设定
+            title: '', // 新增标题输入
+            details: '', // 新增详情信息输入
+            contactInfo: '', // 新增联系方式输入
+            images: [], // 存储选择的图片路径
+            maxImages: 4, // 最大图片数量
+            
       },
       //恢复初始态
       initial() {
@@ -59,10 +78,44 @@ Page({
                         id: 1,
                         check: false
                   }],
+                  selectedCategory: '',
+                  isProductOrDemand: '',
+                  dura: 0,
+                  
             })
       },
       onLoad() {
             this.initial();
+      },
+      // 图片上传逻辑
+      chooseImage: function() {
+        const that = this;
+        const count = this.data.maxImages - this.data.images.length; // 计算还可以选择多少张图片
+    
+        wx.chooseImage({
+          count: count, // 最多可以选择的图片张数
+          sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+          sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+          success(res) {
+            // tempFilePath可以作为img标签的src属性显示图片
+            const tempFilePaths = res.tempFilePaths;
+            that.setData({
+              images: that.data.images.concat(tempFilePaths),
+            });
+          },
+          fail() {
+            // 如果用户取消选择图片，这里可以不做处理
+          }
+        });
+      },
+    
+      deleteImage: function(e) {
+        const index = e.currentTarget.dataset.index;
+        let images = this.data.images;
+        images.splice(index, 1); // 从数组中移除对应的图片
+        this.setData({
+          images: images,
+        });
       },
       //手动输入isbn
       isbnInput(e) {
@@ -91,49 +144,52 @@ Page({
                   }
             })
       },
-      // confirm() {
-      //       let that = this;
-      //       let isbn = that.data.isbn;
-      //       if (!(/978[0-9]{10}/.test(isbn))) {
-      //             wx.showToast({
-      //                   title: '请检查您的isbn号',
-      //                   icon: 'none'
-      //             });
-      //             return false;
-      //       }
-      //       if (!app.openid) {
-      //             wx.showModal({
-      //                   title: '温馨提示',
-      //                   content: '该功能需要注册方可使用，是否马上去注册',
-      //                   success(res) {
-      //                         if (res.confirm) {
-      //                               wx.navigateTo({
-      //                                     url: '/pages/login/login',
-      //                               })
-      //                         }
-      //                   }
-      //             })
-      //             return false
-      //       }
-      //       that.get_book(isbn);
-      // },
+      // 新增选择发布类型和类别的方法
+chooseType(e) {
+  const type = e.detail.value;
+  this.setData({ isProductOrDemand: type });
+},
+chooseCategory(e) {
+  const categoryIndex = e.detail.value;
+  const selectedCategory = this.data.categories[categoryIndex];
+  this.setData({
+    selectedCategory: selectedCategory.name,
+    dura: selectedCategory.days
+  });
+},
+
+      
       confirm() {
-        let that = this;
-        let isbn = that.data.isbn;
-        if (!(/978[0-9]{10}/.test(isbn))) {
-            wx.showToast({
-                title: '请检查您的isbn号',
+            let that = this;
+            if (!that.data.isProductOrDemand || !that.data.selectedCategory) {
+              wx.showToast({
+                title: '请选择发布类型和类别',
                 icon: 'none'
-            });
-            return false;
-        }
-        // 模拟用户已登录的状态
-        if (!app.openid) {
-            // 为app.openid设置一个固定的值来模拟已登录状态
-            app.openid = 'test_openid'; // 注意：在实际应用中，请确保这是临时措施，并在最终产品中移除或替换为真实的登录逻辑
-        }
-        that.get_book(isbn);
-        },
+              });
+              return false;
+            }
+            // if (!app.openid) {
+            //       wx.showModal({
+            //             title: '温馨提示',
+            //             content: '该功能需要注册方可使用，是否马上去注册',
+            //             success(res) {
+            //                   if (res.confirm) {
+            //                         wx.navigateTo({
+            //                               url: '/pages/login/login',
+            //                         })
+            //                   }
+            //             }
+            //       })
+            //       return false
+            // }
+            // that.get_book(isbn);
+              // 直接进入下一步骤，模拟已登录状态
+  that.setData({
+    show_a: false,
+    show_b: true,
+    active: 1,
+  });
+      },
       //查询书籍数据库详情
       get_book(bn) {
             let that = this;
@@ -291,55 +347,50 @@ Page({
             }
             that.publish();
       },
-      //正式发布
-      publish() {
-            let that = this;
-            wx.showModal({
-                  title: '温馨提示',
-                  content: '经检测您填写的信息无误，是否马上发布？',
-                  success(res) {
-                        if (res.confirm) {
-                              db.collection('publish').add({
-                                    data: {
-                                          creat: new Date().getTime(),
-                                          dura: new Date().getTime() + that.data.dura * (24 * 60 * 60 * 1000),
-                                          status: 0, //0在售；1买家已付款，但卖家未发货；2买家确认收获，交易完成；3、交易作废，退还买家钱款
-                                          price: that.data.price, //售价
-                                          //分类
-                                          kindid: that.data.kindid, //区别通用还是专业
-                                          collegeid: that.data.cids, //学院id，-1表示通用类
-                                          deliveryid: that.data.chooseDelivery, //0自1配
-                                          place: that.data.place, //选择自提时地址
-                                          notes: that.data.notes, //备注
-                                          bookinfo: {
-                                                _id: that.data.bookinfo._id,
-                                                author: that.data.bookinfo.author,
-                                                edition: that.data.bookinfo.edition,
-                                                pic: that.data.bookinfo.pic,
-                                                price: that.data.bookinfo.price,
-                                                title: that.data.bookinfo.title,
-                                          },
-                                          key: that.data.bookinfo.title + that.data.bookinfo.keyword
-                                    },
-                                    success(e) {
-                                          console.log(e)
-                                          that.setData({
-                                                show_a: false,
-                                                show_b: false,
-                                                show_c: true,
-                                                active: 2,
-                                                detail_id: e._id
-                                          });
-                                          //滚动到顶部
-                                          wx.pageScrollTo({
-                                                scrollTop: 0,
-                                          })
-                                    }
-                              })
-                        }
-                  }
-            })
-      },
+// 发布逻辑
+publish() {
+  let that = this;
+  if (!that.data.title || that.data.title.length > 10 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
+    wx.showToast({
+      title: '请检查标题、价格或联系方式',
+      icon: 'none'
+    });
+    return false;
+  }
+  
+  wx.showModal({
+    title: '温馨提示',
+    content: '经检测您填写的信息无误，是否马上发布？',
+    success(res) {
+      if (res.confirm) {
+        db.collection('publish').add({
+          data: {
+            creat: new Date().getTime(),
+            status: 0, // 状态等其他原有数据保持不变
+            price: that.data.price,
+            title: that.data.title,
+            details: that.data.details,
+            contactInfo: that.data.contactInfo,
+            images: that.data.images, // 添加图片数组
+            kindid: that.data.kindid, // 步骤一中选择的商品或需求类型
+            category: that.data.selectedCategory, // 步骤一中选择的具体类别
+            dura: that.data.dura, // 根据选择自动填充的时间
+          },
+          success(e) {
+            that.setData({
+              show_a: false,
+              show_b: false,
+              show_c: true,
+              active: 2,
+              detail_id: e._id
+            });
+            wx.pageScrollTo({ scrollTop: 0 });
+          }
+        })
+      }
+    }
+  })
+},
       detail() {
             let that = this;
             wx.navigateTo({

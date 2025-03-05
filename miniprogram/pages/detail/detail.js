@@ -31,7 +31,8 @@ Page({
                               collegeName: JSON.parse(config.data).college[parseInt(res.data.collegeid) + 1],
                               publishinfo: res.data
                         })
-                        that.getSeller(res.data._openid, res.data.bookinfo._id)
+                        // that.getSeller(res.data._openid, res.data.bookinfo._id)
+                        that.getSeller(res.data._openid)
                   }
             })
       },
@@ -49,17 +50,17 @@ Page({
                   }
             })
       },
-      //获取书本信息
-      getBook(e) {
-            let that = this;
-            db.collection('books').doc(e).get({
-                  success: function(res) {
-                        that.setData({
-                              bookinfo: res.data
-                        })
-                  }
-            })
-      },
+      // //获取书本信息
+      // getBook(e) {
+      //       let that = this;
+      //       db.collection('books').doc(e).get({
+      //             success: function(res) {
+      //                   that.setData({
+      //                         bookinfo: res.data
+      //                   })
+      //             }
+      //       })
+      // },
       //回到首页
       home() {
             wx.switchTab({
