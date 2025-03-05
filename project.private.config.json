@@ -5,5 +5,156 @@
     "compileHotReLoad": true,
     "bigPackageSizeSupport": true
   },
-  "libVersion": "3.7.8"
+  "libVersion": "3.7.8",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "success支付成功",
+          "pathName": "pages/success/success",
+          "query": "id=efdeb2615d72487b1319b22650cd56cb",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "start启动页",
+          "pathName": "pages/start/start",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "sell:list我的发布【列表】",
+          "pathName": "pages/sell/list/list",
+          "query": "id=efdeb2615d70eb6012393ac94afadcf6",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "sell:detail我的发布【详情】",
+          "pathName": "pages/sell/detail/detail",
+          "query": "id=efdeb2615d70eb6012393ac94afadcf6",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "search搜索",
+          "pathName": "pages/search/search",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "reflect提现",
+          "pathName": "pages/reflect/reflect",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "recharge充值",
+          "pathName": "pages/recharge/recharge",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "publish发布",
+          "pathName": "pages/publish/publish",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "poster模板化图片",
+          "pathName": "pages/poster/poster",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "parse钱包",
+          "pathName": "pages/parse/parse",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "order:list【订单】列表",
+          "pathName": "pages/order/list/list",
+          "query": "id=5d262bd45d7264f5134049797256c6f9",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "order:detail【订单】详情",
+          "pathName": "pages/order/detail/detail",
+          "query": "id=5d262bd45d7264f5134049797256c6f9",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "my个人中心",
+          "pathName": "pages/my/my",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "login用户注册",
+          "pathName": "pages/login/login",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "kefu联系客服",
+          "pathName": "pages/kefu/kefu",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "index首页",
+          "pathName": "pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "help帮助反馈",
+          "pathName": "pages/help/help",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "edit修改用户信息",
+          "pathName": "pages/edit/edit",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "detail商品/需求发布页",
+          "pathName": "pages/detail/detail",
+          "query": "scene=3c4c6d855d70f8b6124543920c2934e6",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "about关于程序：开发者介绍",
+          "pathName": "pages/about/about",
+          "query": "scene=3c4c6d855d70f8b6124543920c2934e6",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "db guide",
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
+        }
+      ]
+    }
+  }
 }
