@@ -158,7 +158,7 @@ Page({
             let campus = that.data.campus;
             if (ids == -1) {
                   wx.showToast({
-                        title: '请先获取您的校区',
+                        title: '请先获取您的学院',
                         icon: 'none',
                         duration: 2000
                   });

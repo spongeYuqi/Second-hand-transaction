@@ -91,32 +91,49 @@ Page({
                   }
             })
       },
+      // confirm() {
+      //       let that = this;
+      //       let isbn = that.data.isbn;
+      //       if (!(/978[0-9]{10}/.test(isbn))) {
+      //             wx.showToast({
+      //                   title: '请检查您的isbn号',
+      //                   icon: 'none'
+      //             });
+      //             return false;
+      //       }
+      //       if (!app.openid) {
+      //             wx.showModal({
+      //                   title: '温馨提示',
+      //                   content: '该功能需要注册方可使用，是否马上去注册',
+      //                   success(res) {
+      //                         if (res.confirm) {
+      //                               wx.navigateTo({
+      //                                     url: '/pages/login/login',
+      //                               })
+      //                         }
+      //                   }
+      //             })
+      //             return false
+      //       }
+      //       that.get_book(isbn);
+      // },
       confirm() {
-            let that = this;
-            let isbn = that.data.isbn;
-            if (!(/978[0-9]{10}/.test(isbn))) {
-                  wx.showToast({
-                        title: '请检查您的isbn号',
-                        icon: 'none'
-                  });
-                  return false;
-            }
-            if (!app.openid) {
-                  wx.showModal({
-                        title: '温馨提示',
-                        content: '该功能需要注册方可使用，是否马上去注册',
-                        success(res) {
-                              if (res.confirm) {
-                                    wx.navigateTo({
-                                          url: '/pages/login/login',
-                                    })
-                              }
-                        }
-                  })
-                  return false
-            }
-            that.get_book(isbn);
-      },
+        let that = this;
+        let isbn = that.data.isbn;
+        if (!(/978[0-9]{10}/.test(isbn))) {
+            wx.showToast({
+                title: '请检查您的isbn号',
+                icon: 'none'
+            });
+            return false;
+        }
+        // 模拟用户已登录的状态
+        if (!app.openid) {
+            // 为app.openid设置一个固定的值来模拟已登录状态
+            app.openid = 'test_openid'; // 注意：在实际应用中，请确保这是临时措施，并在最终产品中移除或替换为真实的登录逻辑
+        }
+        that.get_book(isbn);
+        },
       //查询书籍数据库详情
       get_book(bn) {
             let that = this;

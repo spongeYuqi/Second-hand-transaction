@@ -30,7 +30,7 @@
       font-size: 30rpx;
       letter-spacing: 2rpx;
       display: flex;
-      align-items: ;
+      align-items: stretch;
 }
 
 .text-red {
