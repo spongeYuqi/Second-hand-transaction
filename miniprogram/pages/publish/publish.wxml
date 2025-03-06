@@ -15,13 +15,16 @@
         <radio value="demand" /> 需求
       </label>
     </radio-group>
+    <!-- 分隔线 -->
+    <view class="a_separator"></view>
 
-    <!-- 添加发布类别选择 -->
-    <picker mode="selector" range="{{categories}}" range-key="name" value="{{selectedCategoryIndex}}" bindchange="chooseCategory">
-      <view class="b_picker">
-        当前选择：{{selectedCategory}}
-      </view>
-    </picker>
+<!-- 添加发布类别选择 -->
+<picker mode="selector" range="{{categories}}" range-key="name" value="{{selectedCategoryIndex}}" bindchange="chooseCategory">
+  <!-- 应用了新增的 a_picker_large 样式类 -->
+  <view class="a_picker">
+    当前选择：{{selectedCategory}}
+  </view>
+</picker>
     <view class="a_confirm" bindtap="confirm">确认</view>
   </view>
 </van-transition>
@@ -80,7 +83,7 @@
   </view>
 </van-popup>
 <!-- 新增：上一步按钮 -->
-    <view class="a_confirm" bindtap="goToPreviousStep">上一步</view>
+    <view class="b_confirm" bindtap="goToPreviousStep">上一步</view>
 
     <!-- 马上发布 -->
     <view class="b_publish" bindtap="publish">马上发布</view>
