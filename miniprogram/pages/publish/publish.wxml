@@ -74,10 +74,12 @@
       bindinput="onPriceInput" 
       bindblur="hidePriceInput"
       focus="{{inputFocused}}"  
-      style="width: 100%; font-size: 48rpx; text-align: center;"
+      style="width: 100%; font-size: 48rpx; text-align: center; color: #000;"
+      placeholder-style="font-size: 36rpx;"
     />
   </view>
 </van-popup>
+
     <!-- 马上发布 -->
     <view class="b_publish" bindtap="publish">马上发布</view>
   </view>

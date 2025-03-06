@@ -44,6 +44,7 @@ Page({
             showPopup: false, // 控制弹出层显示/隐藏
             inputFocused: false, // 控制输入框是否自动聚焦
             
+            
           
             
       },
@@ -52,7 +53,7 @@ Page({
             let that = this;
             that.setData({
                   dura: 30,
-                  price: 15,
+                  price: '',
                   place: '',
                   chooseDelivery: 0,
                   cids: '-1', //学院选择的默认值
@@ -86,6 +87,7 @@ Page({
                   selectedCategory: '',
                   isProductOrDemand: '',
                   dura: 0,
+                  
                   
             })
       },
@@ -190,6 +192,8 @@ onPriceInput(event) {
   // 更新价格数据
   this.setData({ price: value });
 },
+
+
 
       // 新增选择发布类型和类别的方法
 chooseType(e) {
