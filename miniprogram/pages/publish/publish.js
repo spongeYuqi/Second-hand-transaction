@@ -275,38 +275,60 @@ publish() {
     return false;
   }
   
+  // wx.showModal({
+  //   title: '温馨提示',
+  //   content: '经检测您填写的信息无误，是否马上发布？',
+  //   success(res) {
+  //     if (res.confirm) {
+  //       db.collection('publish').add({
+  //         data: {
+  //           creat: new Date().getTime(),
+  //           status: 0, // 状态等其他原有数据保持不变
+  //           price: that.data.price,
+  //           title: that.data.title,
+  //           details: that.data.details,
+  //           contactInfo: that.data.contactInfo,
+  //           images: that.data.images, // 添加图片数组
+  //           kindid: that.data.kindid, // 步骤一中选择的商品或需求类型
+  //           category: that.data.selectedCategory, // 步骤一中选择的具体类别
+  //           dura: that.data.dura, // 根据选择自动填充的时间
+  //         },
+  //         success(e) {
+  //           that.setData({
+  //             show_a: false,
+  //             show_b: false,
+  //             show_c: true,
+  //             active: 2,
+  //             detail_id: e._id
+  //           });
+  //           wx.pageScrollTo({ scrollTop: 0 });
+  //         }
+  //       })
+  //     }
+  //   }
+  // })
+
+  // 省略数据库上传部分
+
+  // 直接模拟成功发布后的状态更新
   wx.showModal({
     title: '温馨提示',
     content: '经检测您填写的信息无误，是否马上发布？',
     success(res) {
       if (res.confirm) {
-        db.collection('publish').add({
-          data: {
-            creat: new Date().getTime(),
-            status: 0, // 状态等其他原有数据保持不变
-            price: that.data.price,
-            title: that.data.title,
-            details: that.data.details,
-            contactInfo: that.data.contactInfo,
-            images: that.data.images, // 添加图片数组
-            kindid: that.data.kindid, // 步骤一中选择的商品或需求类型
-            category: that.data.selectedCategory, // 步骤一中选择的具体类别
-            dura: that.data.dura, // 根据选择自动填充的时间
-          },
-          success(e) {
-            that.setData({
-              show_a: false,
-              show_b: false,
-              show_c: true,
-              active: 2,
-              detail_id: e._id
-            });
-            wx.pageScrollTo({ scrollTop: 0 });
-          }
-        })
+        // 模拟发布成功后的状态更新
+        that.setData({
+          show_a: false,
+          show_b: false,
+          show_c: true,
+          active: 2,
+          // 可以为 detail_id 赋一个假值或者留空，根据您的需求
+          // detail_id: '模拟ID' 
+        });
+        wx.pageScrollTo({ scrollTop: 0 });
       }
     }
-  })
+  });
 },
       detail() {
             let that = this;
