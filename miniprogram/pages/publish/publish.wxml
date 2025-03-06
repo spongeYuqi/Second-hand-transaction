@@ -26,7 +26,7 @@
   </view>
 </van-transition>
 <!-- 步骤二 -->
-<van-transition show="{{ show_b }}" name="fade-right" custom-class="block" duration="{{entime}}">
+<van-transition show="{{ show_b }}" name="slide-right" custom-class="block" duration="{{entime}}">
   <view class="b_contain">
     <!-- 标题输入 -->
     <view class="b_bar">
@@ -79,6 +79,8 @@
     />
   </view>
 </van-popup>
+<!-- 新增：上一步按钮 -->
+    <view class="a_confirm" bindtap="goToPreviousStep">上一步</view>
 
     <!-- 马上发布 -->
     <view class="b_publish" bindtap="publish">马上发布</view>

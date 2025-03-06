@@ -87,6 +87,9 @@ Page({
                   selectedCategory: '',
                   isProductOrDemand: '',
                   dura: 0,
+                  show_a: true, // 初始显示步骤一
+                  show_b: false, // 初始不显示步骤二
+                  active: 0, // 初始激活步骤一
                   
                   
             })
@@ -191,6 +194,14 @@ onPriceInput(event) {
 
   // 更新价格数据
   this.setData({ price: value });
+},
+
+goToPreviousStep: function() {
+  this.setData({
+    show_a: true, // 显示步骤一
+    show_b: false, // 隐藏步骤二
+    active: 0 // 更新步骤条的激活状态为步骤一
+  });
 },
 
 
