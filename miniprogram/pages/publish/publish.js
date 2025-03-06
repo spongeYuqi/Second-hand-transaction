@@ -40,6 +40,9 @@ Page({
             contactInfo: '', // 新增联系方式输入
             images: [], // 存储选择的图片路径
             maxImages: 4, // 最大图片数量
+            price: 0, // 默认价格，注意这里用字符串形式以保留小数点格式
+            showPopup: false, // 控制弹出层显示/隐藏
+          
             
       },
       //恢复初始态
@@ -86,6 +89,7 @@ Page({
       },
       onLoad() {
             this.initial();
+            this.setData({ price: 0 });
       },
       // 图片上传逻辑
       chooseImage: function() {
@@ -93,11 +97,10 @@ Page({
         const count = this.data.maxImages - this.data.images.length; // 计算还可以选择多少张图片
     
         wx.chooseImage({
-          count: count, // 最多可以选择的图片张数
-          sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-          sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+          count: count,
+          sizeType: ['original', 'compressed'],
+          sourceType: ['album', 'camera'],
           success(res) {
-            // tempFilePath可以作为img标签的src属性显示图片
             const tempFilePaths = res.tempFilePaths;
             that.setData({
               images: that.data.images.concat(tempFilePaths),
@@ -117,33 +120,64 @@ Page({
           images: images,
         });
       },
-      //手动输入isbn
-      isbnInput(e) {
-            this.data.isbn = e.detail.value;
+    
+      previewImage: function(e) {
+        const index = e.currentTarget.dataset.index;
+        const current = this.data.images[index];
+        wx.previewImage({
+          current: current,
+          urls: this.data.images
+        });
       },
-      //打开摄像头扫码isbn
-      scan() {
-            let that = this;
-            wx.scanCode({
-                  onlyFromCamera: false,
-                  scanType: ['barCode'],
-                  success: res => {
-                        wx.showToast({
-                              title: '扫码成功',
-                              icon: 'success'
-                        })
-                        that.setData({
-                              isbn: res.result
-                        })
-                  },
-                  fail() {
-                        wx.showToast({
-                              title: '扫码失败，请重新扫码或者手动输入',
-                              icon: 'none'
-                        })
-                  }
-            })
-      },
+
+  previewImage: function(e) {
+    const index = e.currentTarget.dataset.index;
+    const current = this.data.images[index];
+    wx.previewImage({
+      current: current,
+      urls: this.data.images
+    });
+  },
+  
+// 显示数字输入框
+// 显示数字输入框
+showPriceInput() {
+  this.setData({ showPopup: true }, () => {
+    // 使用定时器延迟执行，确保弹出层已经渲染完成
+    setTimeout(() => {
+      const inputComponent = this.selectComponent('#priceInput');
+      if (inputComponent) {
+        inputComponent.focus();
+      }
+    }, 300); // 根据实际情况调整延迟时间
+  });
+},
+
+// 隐藏数字输入框
+hidePriceInput() {
+  this.setData({ showPopup: false });
+},
+
+// 当输入价格时触发
+onPriceInput(event) {
+  let value = event.detail.value;
+  
+  // 如果输入的是空值，则保留默认值0
+  if (value === '') value = 0;
+
+  // 更新价格数据
+  this.setData({ price: parseInt(value) });
+},
+
+// 在弹出层出现后尝试聚焦到输入框
+onPopupAppear() {
+  const inputComponent = this.selectComponent('#priceInput');
+  if (inputComponent) {
+    inputComponent.focus();
+  }
+},
+
+
       // 新增选择发布类型和类别的方法
 chooseType(e) {
   const type = e.detail.value;

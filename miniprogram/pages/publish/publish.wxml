@@ -42,28 +42,39 @@
     <view class="b_bar">
       <input placeholder="请输入联系方式（必填，不超过20字）" bindinput="bindContactInput" value="{{contactInfo}}" maxlength="20"/>
     </view>
-
-    <!-- 图片上传 -->
-    <view class="b_bar">
-  <!-- 上传按钮根据图片数量决定是否显示 -->
-  <button bindtap="chooseImage" wx:if="{{images.length < maxImages}}">上传图片（最多四张）</button>
-  
-  <!-- 显示已选择的图片 -->
+<!-- 上传图框 -->
+    <view class="image-container">
   <block wx:for="{{images}}" wx:key="index">
     <view class="image-item" style="position:relative;">
-      <image src="{{item}}" style="width: 100px; height: 100px;" />
-      <!-- 删除按钮 -->
-      <button bindtap="deleteImage" data-index="{{index}}" size="mini" style="position:absolute;top:0;right:0;">删除</button>
+      <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-index="{{index}}" class="uploaded-image"/>
+      <image class="delete-btn" src="/images/on.png" data-index="{{index}}" bindtap="deleteImage"></image>
     </view>
   </block>
+  <view class="upload-btn" wx:if="{{images.length < maxImages}}" bindtap="chooseImage">
+    <image src="/images/off.png" class="add-icon" />
+  </view>
+</view>
+<!-- 价格输入 -->
+<!-- 价格输入 -->
+<view class="b_bar" bindtap="showPriceInput">
+  <view class="b_name">价格(元)</view>
+  <view class="price-display">{{price}}</view> <!-- 显示当前价格 -->
 </view>
 
-    <!-- 价格输入 -->
-    <view class="b_bar">
-      <view class="b_name">价格(元)</view>
-      <van-stepper value="{{price}}" integer bind:change="priceChange" min="1" max="100" />
-    </view>
-
+<!-- 弹出的数字输入框 -->
+<van-popup show="{{showPopup}}" position="bottom" custom-style="height: 30%;" bindappear="onPopupAppear">
+  <view style="padding: 20rpx;">
+    <input 
+      id="priceInput"
+      type="number" 
+      value="{{price}}" 
+      placeholder="请输入价格" 
+      bindinput="onPriceInput" 
+      bindblur="hidePriceInput"
+      style="width: 100%; font-size: 48rpx; text-align: center;"
+    />
+  </view>
+</van-popup>
     <!-- 马上发布 -->
     <view class="b_publish" bindtap="publish">马上发布</view>
   </view>
