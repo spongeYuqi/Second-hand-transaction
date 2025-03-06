@@ -57,7 +57,14 @@ page {
 }
 
 /*步骤二*/
-
+.block {
+  position: fixed;
+  top: 120rpx; /* 这里的值应与.top_steps的高度一致 */
+  left: 0;
+  width: 100%;
+  z-index: 8; /* 确保z-index小于.top_steps，但大于其他内容 */
+  background-color: white; /* 根据需要调整背景颜色 */
+}
 /* 确保.b_contain使用column方向 */
 .b_contain {
   width: 100%;

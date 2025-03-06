@@ -94,8 +94,8 @@
       <view class="c_contain" style="height:{{systeminfo.windowHeight-66.8}}px">
             <image class="c_success" src="/images/success.png"></image>
             <view class="c_title">恭喜您 发布成功</view>
-            <view class="c_des">订单的实时状态将通过短信和邮箱通知您</view>
+            
             <view class="c_see" bindtap="detail" >查看详情</view>
-            <view class="c_again shadow" bindtap="initial">再来一本</view>
+            <view class="c_again shadow" bindtap="initial">再发一个</view>
       </view>
 </van-transition>
