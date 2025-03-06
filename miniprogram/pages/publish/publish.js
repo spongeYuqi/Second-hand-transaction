@@ -35,7 +35,7 @@ Page({
             selectedCategory: '', // 存储用户选择的类别
             isProductOrDemand: '', // 存储用户选择的商品或需求
             dura: 0, // 根据选择自动设定
-            title: '', // 新增标题输入
+           
             details: '', // 新增详情信息输入
             contactInfo: '', // 新增联系方式输入
             images: [], // 存储选择的图片路径
@@ -82,7 +82,7 @@ Page({
                   }],
                   selectedCategory: '', // 清除选中的类别
                   isProductOrDemand: '', // 清除选择的商品或需求类型
-                  title: '', // 清除标题输入
+                  
                   details: '', // 清除详情信息输入
                   contactInfo: '', // 清除联系方式输入
                   images: [], // 清除已上传的图片路径数组
@@ -152,11 +152,6 @@ chooseCategory(e) {
 //步骤二上传逻辑
 
 // 新增的事件处理函数
-bindTitleInput(e) {
-  this.setData({
-    title: e.detail.value
-  });
-},
 
 bindDetailsInput(e) {
   this.setData({
@@ -283,9 +278,9 @@ publish() {
   console.log('Title:', that.data.title);
   console.log('Price:', that.data.price);
   console.log('Contact Info:', that.data.contactInfo);
-  if (!that.data.title || that.data.title.length > 20 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
+  if (!that.data.details || that.data.details.length > 20 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
     wx.showToast({
-      title: '请检查标题、价格或联系方式',
+      title: '请检查详情、价格或联系方式',
       icon: 'none'
     });
     return false;

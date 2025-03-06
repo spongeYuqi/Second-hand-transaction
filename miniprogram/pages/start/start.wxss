@@ -29,4 +29,5 @@
       text-align: center;
       width: 160rpx;
       height: 60rpx;
+      border: 0.5px solid #fbbd08; /* 实线边框 */
 }

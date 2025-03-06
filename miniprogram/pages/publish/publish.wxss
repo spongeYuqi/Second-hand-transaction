@@ -97,14 +97,10 @@ page {
   height: 80rpx; /* 默认高度 */
 }
 
-/* 特别为标题输入框设置样式 */
-.b_bar input[placeholder="请输入标题（不超过20字）"] {
-  font-weight: bold; /* 强调标题 */
-  /* 其他属性已经在通用样式中定义，这里无需重复 */
-}
+
 
 /* 详情信息文本域样式 */
-.b_bar textarea[placeholder="请输入详情信息（可选填，限制200字）"] {
+.b_bar textarea[placeholder="请输入详情信息（必填，限制200字）"] {
   height: 300rpx; /* 覆盖默认高度以提供更大的输入区域 */
   resize: none; /* 防止用户调整大小 */
   /* 其他属性已经在通用样式中定义，这里无需重复 */

@@ -9,10 +9,10 @@
   <view class="a_contain">
     <radio-group bindchange="chooseType">
   <label class="a_radio" wx:key="id">
-    <radio value="product" checked="{{isProductOrDemand === 'product'}}"/> 商品
+    <radio value="product" checked="{{isProductOrDemand === 'product'}}"/> 我出售
   </label>
   <label class="a_radio" wx:key="id">
-    <radio value="demand" checked="{{isProductOrDemand === 'demand'}}"/> 需求
+    <radio value="demand" checked="{{isProductOrDemand === 'demand'}}"/> 我需要
   </label>
 </radio-group>
     <!-- 分隔线 -->
@@ -22,7 +22,7 @@
 <picker mode="selector" range="{{categories}}" range-key="name" value="{{selectedCategoryIndex}}" bindchange="chooseCategory">
   <!-- 应用了新增的 a_picker_large 样式类 -->
   <view class="a_picker">
-    当前选择：{{selectedCategory}}
+    请选择发布类别：{{selectedCategory}}
   </view>
 </picker>
     <view class="a_confirm" bindtap="confirm">确认</view>
@@ -31,14 +31,11 @@
 <!-- 步骤二 -->
 <van-transition show="{{ show_b }}" name="slide-right" custom-class="block" duration="{{entime}}">
   <view class="b_contain">
-    <!-- 标题输入 -->
-    <view class="b_bar">
-      <input placeholder="请输入标题（不超过20字）" bindinput="bindTitleInput" value="{{title}}" maxlength="20"/>
-    </view>
+   
     
     <!-- 详情信息输入 -->
     <view class="b_bar">
-      <textarea placeholder="请输入详情信息（可选填，限制200字）" bindinput="bindDetailsInput" value="{{details}}" maxlength="200"/>
+      <textarea placeholder="请输入详情信息（必填，限制200字）" bindinput="bindDetailsInput" value="{{details}}" maxlength="200"/>
     </view>
 
     <!-- 联系方式输入 -->
