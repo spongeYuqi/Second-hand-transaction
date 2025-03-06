@@ -233,6 +233,41 @@ page {
   color: #333;
   margin-left: auto; /* 让价格显示靠右 */
 }
+/* 防止页面上移 */
+page, .container {
+  height: 100%;
+  overflow: hidden;
+}
+/* 设置整体容器的高度和溢出属性 */
+page, .container {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 设置价格显示区域的基本样式 */
+.b_bar {
+  display: flex;
+  align-items: center;
+  padding: 10rpx;
+}
+
+/* 设置“价格(元)”的样式 */
+.b_name {
+  font-size: 36rpx; /* 根据实际需要调整字体大小 */
+  color: #000; /* 黑色或其他所需的颜色 */
+}
+
+/* 设置价格值的样式 */
+.price-value {
+  font-size: 36rpx; /* 与.b_name的字体大小一致 */
+  color: #000; /* 与.b_name的颜色一致 */
+}
+
+/* 设置价格占位符（即“请输入”）的样式 */
+.price-placeholder {
+  font-size: 36rpx; /* 与.b_name的字体大小一致 */
+  color: #ccc; /* 较浅的灰色 */
+}
 
 /* 步骤3 */
 .c_contain {

@@ -58,19 +58,22 @@
 <!-- 价格输入 -->
 <view class="b_bar" bindtap="showPriceInput">
   <view class="b_name">价格(元)</view>
-  <view class="price-display">{{price}}</view> <!-- 显示当前价格 -->
+  <view class="price-display {{price ? 'price-value' : 'price-placeholder'}}">
+    {{price ? price : '请输入'}}
+  </view>
 </view>
 
 <!-- 弹出的数字输入框 -->
-<van-popup show="{{showPopup}}" position="bottom" custom-style="height: 30%;" bindappear="onPopupAppear">
+<van-popup show="{{showPopup}}" position="bottom" custom-style="height: 30%;">
   <view style="padding: 20rpx;">
     <input 
       id="priceInput"
-      type="number" 
+      type="digit"  
       value="{{price}}" 
       placeholder="请输入价格" 
       bindinput="onPriceInput" 
       bindblur="hidePriceInput"
+      focus="{{inputFocused}}"  
       style="width: 100%; font-size: 48rpx; text-align: center;"
     />
   </view>

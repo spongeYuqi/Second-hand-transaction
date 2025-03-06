@@ -40,8 +40,10 @@ Page({
             contactInfo: '', // 新增联系方式输入
             images: [], // 存储选择的图片路径
             maxImages: 4, // 最大图片数量
-            price: 0, // 默认价格，注意这里用字符串形式以保留小数点格式
+            price: '', // 默认为空字符串
             showPopup: false, // 控制弹出层显示/隐藏
+            inputFocused: false, // 控制输入框是否自动聚焦
+            
           
             
       },
@@ -89,7 +91,7 @@ Page({
       },
       onLoad() {
             this.initial();
-            this.setData({ price: 0 });
+            //this.setData({ price: '0' });
       },
       // 图片上传逻辑
       chooseImage: function() {
@@ -142,12 +144,15 @@ Page({
 // 显示数字输入框
 // 显示数字输入框
 showPriceInput() {
-  this.setData({ showPopup: true }, () => {
+  this.setData({
+    showPopup: true,
+    inputFocused: true // 设置为true以自动聚焦
+  }, () => {
     // 使用定时器延迟执行，确保弹出层已经渲染完成
     setTimeout(() => {
       const inputComponent = this.selectComponent('#priceInput');
       if (inputComponent) {
-        inputComponent.focus();
+        inputComponent.focus(); // 手动调用focus方法
       }
     }, 300); // 根据实际情况调整延迟时间
   });
@@ -155,28 +160,36 @@ showPriceInput() {
 
 // 隐藏数字输入框
 hidePriceInput() {
-  this.setData({ showPopup: false });
+  this.setData({
+    showPopup: false,
+    inputFocused: false // 关闭自动聚焦
+  });
 },
 
 // 当输入价格时触发
 onPriceInput(event) {
   let value = event.detail.value;
-  
-  // 如果输入的是空值，则保留默认值0
-  if (value === '') value = 0;
+
+  // 如果输入为空，直接设置为空字符串
+  if (value === '') {
+    this.setData({ price: '' });
+    return;
+  }
+
+  // 去除整数部分的前导零
+  if (value.includes('.')) {
+    const [integerPart, decimalPart] = value.split('.');
+    // 只有当整数部分不为0时才进行parseInt转换，避免将合法的0.开头的数字变为0
+    const formattedIntegerPart = integerPart !== '0' ? parseInt(integerPart, 10).toString() : integerPart;
+    value = formattedIntegerPart + '.' + decimalPart;
+  } else {
+    // 对于没有小数点的部分，仅当其不是0时才进行转换
+    value = value !== '0' ? parseInt(value, 10).toString() : value;
+  }
 
   // 更新价格数据
-  this.setData({ price: parseInt(value) });
+  this.setData({ price: value });
 },
-
-// 在弹出层出现后尝试聚焦到输入框
-onPopupAppear() {
-  const inputComponent = this.selectComponent('#priceInput');
-  if (inputComponent) {
-    inputComponent.focus();
-  }
-},
-
 
       // 新增选择发布类型和类别的方法
 chooseType(e) {
