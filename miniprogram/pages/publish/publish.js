@@ -58,10 +58,6 @@ Page({
                   chooseDelivery: 0,
                   cids: '-1', //学院选择的默认值
                   isbn: '',
-                  show_a: true,
-                  show_b: false,
-                  show_c: false,
-                  active: 0,
                   chooseCollege: false,
                   note_counts: 0,
                   notes: '',
@@ -84,11 +80,16 @@ Page({
                         id: 1,
                         check: false
                   }],
-                  selectedCategory: '',
-                  isProductOrDemand: '',
-                  dura: 0,
+                  selectedCategory: '', // 清除选中的类别
+                  isProductOrDemand: '', // 清除选择的商品或需求类型
+                  title: '', // 清除标题输入
+                  details: '', // 清除详情信息输入
+                  contactInfo: '', // 清除联系方式输入
+                  images: [], // 清除已上传的图片路径数组
+                  dura: 30,
                   show_a: true, // 初始显示步骤一
                   show_b: false, // 初始不显示步骤二
+                  show_c: false,// 初始不显示步骤三
                   active: 0, // 初始激活步骤一
                   
                   

@@ -8,13 +8,13 @@
   <!-- 添加发布类型选择 -->
   <view class="a_contain">
     <radio-group bindchange="chooseType">
-      <label class="a_radio" wx:key="id">
-        <radio value="product"/> 商品
-      </label>
-      <label class="a_radio" wx:key="id">
-        <radio value="demand" /> 需求
-      </label>
-    </radio-group>
+  <label class="a_radio" wx:key="id">
+    <radio value="product" checked="{{isProductOrDemand === 'product'}}"/> 商品
+  </label>
+  <label class="a_radio" wx:key="id">
+    <radio value="demand" checked="{{isProductOrDemand === 'demand'}}"/> 需求
+  </label>
+</radio-group>
     <!-- 分隔线 -->
     <view class="a_separator"></view>
 
