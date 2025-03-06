@@ -147,16 +147,28 @@ chooseCategory(e) {
       },
 
  
-      //价格输入改变
-      priceChange(e) {
-            this.data.price = e.detail;
-      },
-      //时才输入改变
-      duraChange(e) {
-            this.data.dura = e.detail;
-      },
 
-//步骤二图片上传逻辑
+//步骤二上传逻辑
+
+// 新增的事件处理函数
+bindTitleInput(e) {
+  this.setData({
+    title: e.detail.value
+  });
+},
+
+bindDetailsInput(e) {
+  this.setData({
+    details: e.detail.value
+  });
+},
+
+bindContactInput(e) {
+  this.setData({
+    contactInfo: e.detail.value
+  });
+},
+//图片
       chooseImage: function() {
         const that = this;
         const count = this.data.maxImages - this.data.images.length; // 计算还可以选择多少张图片
@@ -267,7 +279,10 @@ goToPreviousStep: function() {
 // 发布逻辑
 publish() {
   let that = this;
-  if (!that.data.title || that.data.title.length > 10 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
+  console.log('Title:', that.data.title);
+  console.log('Price:', that.data.price);
+  console.log('Contact Info:', that.data.contactInfo);
+  if (!that.data.title || that.data.title.length > 20 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
     wx.showToast({
       title: '请检查标题、价格或联系方式',
       icon: 'none'
