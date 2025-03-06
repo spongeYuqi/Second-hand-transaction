@@ -20,6 +20,11 @@ page {
       background: #fff;
       box-shadow: 0 30rpx 20rpx rgb(240, 240, 240);
 }
+
+.a_radio {
+  margin-right: 10px; /* 根据需要调整这个值 */
+  display: inline-block;
+}
 /* 定义一个新的样式，增加行高和一些内边距 */
 .a_picker {
   line-height: 2.5em; /* 调整这个值以增加或减少高度 */
