@@ -9,7 +9,7 @@
   <view class="a_contain">
     <radio-group bindchange="chooseType">
       <label class="b_radio" wx:key="id">
-        <radio value="product" /> 商品
+        <radio value="product"/> 商品
       </label>
       <label class="b_radio" wx:key="id">
         <radio value="demand" /> 需求
