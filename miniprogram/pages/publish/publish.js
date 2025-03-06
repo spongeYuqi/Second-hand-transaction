@@ -247,14 +247,16 @@ onPriceInput(event) {
     return;
   }
 
-  // 去除整数部分的前导零
-  if (value.includes('.')) {
+  // 检查是否以小数点开头，并且后面跟着数字，如果是，则在前面补0
+  if (/^\.\d+$/.test(value)) {
+    value = '0' + value; // 在前面加上0
+  } else if (value.includes('.')) { // 如果包含小数点，分别处理整数和小数部分
     const [integerPart, decimalPart] = value.split('.');
-    // 只有当整数部分不为0时才进行parseInt转换，避免将合法的0.开头的数字变为0
-    const formattedIntegerPart = integerPart !== '0' ? parseInt(integerPart, 10).toString() : integerPart;
+    // 只有当整数部分不为0或空时才进行parseInt转换
+    const formattedIntegerPart = integerPart !== '0' && integerPart !== '' ? parseInt(integerPart, 10).toString() : '0';
+    // 合并整数和小数部分
     value = formattedIntegerPart + '.' + decimalPart;
-  } else {
-    // 对于没有小数点的部分，仅当其不是0时才进行转换
+  } else { // 对于没有小数点的部分，仅当其不是0时才进行转换
     value = value !== '0' ? parseInt(value, 10).toString() : value;
   }
 
@@ -324,7 +326,7 @@ publish() {
   // 直接模拟成功发布后的状态更新
   wx.showModal({
     title: '温馨提示',
-    content: '经检测您填写的信息无误，是否马上发布？',
+    content: '请确保您填写的信息无误，是否马上发布？',
     success(res) {
       if (res.confirm) {
         // 模拟发布成功后的状态更新
