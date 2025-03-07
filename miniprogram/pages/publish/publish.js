@@ -35,18 +35,13 @@ Page({
             selectedCategory: '', // 存储用户选择的类别
             isProductOrDemand: '', // 存储用户选择的商品或需求
             dura: 0, // 根据选择自动设定
-           
             details: '', // 新增详情信息输入
             contactInfo: '', // 新增联系方式输入
             images: [], // 存储选择的图片路径
             maxImages: 4, // 最大图片数量
             price: '', // 默认为空字符串
             showPopup: false, // 控制弹出层显示/隐藏
-            inputFocused: false, // 控制输入框是否自动聚焦
-            
-            
-          
-            
+            inputFocused: false // 控制输入框是否自动聚焦
       },
       //恢复初始态
       initial() {
@@ -287,58 +282,40 @@ publish() {
     });
     return false;
   }
-  
-  // wx.showModal({
-  //   title: '温馨提示',
-  //   content: '经检测您填写的信息无误，是否马上发布？',
-  //   success(res) {
-  //     if (res.confirm) {
-  //       db.collection('publish').add({
-  //         data: {
-  //           creat: new Date().getTime(),
-  //           status: 0, // 状态等其他原有数据保持不变
-  //           price: that.data.price,
-  //           title: that.data.title,
-  //           details: that.data.details,
-  //           contactInfo: that.data.contactInfo,
-  //           images: that.data.images, // 添加图片数组
-  //           kindid: that.data.kindid, // 步骤一中选择的商品或需求类型
-  //           category: that.data.selectedCategory, // 步骤一中选择的具体类别
-  //           dura: that.data.dura, // 根据选择自动填充的时间
-  //         },
-  //         success(e) {
-  //           that.setData({
-  //             show_a: false,
-  //             show_b: false,
-  //             show_c: true,
-  //             active: 2,
-  //             detail_id: e._id
-  //           });
-  //           wx.pageScrollTo({ scrollTop: 0 });
-  //         }
-  //       })
-  //     }
-  //   }
-  // })
-
-  // 省略数据库上传部分
-
-  // 直接模拟成功发布后的状态更新
   wx.showModal({
     title: '温馨提示',
     content: '请确保您填写的信息无误，是否马上发布？',
     success(res) {
       if (res.confirm) {
-        // 模拟发布成功后的状态更新
-        that.setData({
-          show_a: false,
-          show_b: false,
-          show_c: true,
-          active: 2,
-          // 可以为 detail_id 赋一个假值或者留空，根据您的需求
-          // detail_id: '模拟ID' 
-        });
-        wx.pageScrollTo({ scrollTop: 0 });
+        wx.cloud.init()
+        const db = wx.cloud.database()
+        db.collection('publish').add({
+          data: {
+            type: that.data.isProductOrDemand,
+            category: that.data.selectedCategory,
+            details: that.data.details,
+            contactInfo: that.data.contactInfo,
+            images: that.data.images,
+            price: that.data.price,
+            createTime: db.serverDate()
+          },
+          success(e) {
+            that.setData({
+              show_a: false,
+              show_b: false,
+              show_c: true,
+              active: 2,
+              detail_id: e._id
+            });
+            wx.pageScrollTo({ scrollTop: 0 });
+          },
+          fail(err) {
+            wx.showToast({
+              title: '发布失败，请重试',
+              icon: 'none'
+            })
+          }
+        })
       }
     }
   });

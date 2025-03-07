@@ -4,10 +4,7 @@
             <image class="bot_over" src="/images/over.png"></image>
             <view class="goods_box">
                   <image class="goods_img" src="{{detail.bookinfo.pic}}"></image>
-                  <view class="goods_content">
-                        <view class="goods_title text-cut">{{detail.bookinfo.title}}(第{{detail.bookinfo.edition}})</view>
-                        <view class="goods_author text-cut">{{detail.bookinfo.author}}</view>
-                  </view>
+                  
                   <view class="goods_price">￥{{detail.price}}元</view>
             </view>
             <view class="border"></view>

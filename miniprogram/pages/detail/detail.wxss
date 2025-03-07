@@ -111,22 +111,7 @@
       letter-spacing: 2rpx;
 }
 
-.local_box {
-      display: flex;
-      align-items: center;
-}
 
-.local_box image {
-      width: 30rpx;
-      height: 30rpx;
-}
-
-.local_box view {
-      padding-left: 5rpx;
-      font-size: 28rpx;
-      letter-spacing: 2rpx;
-      color: rgb(150, 150, 150);
-}
 
 .sex {
       width: 100rpx;
@@ -142,30 +127,7 @@
       border-radius: 50%;
 }
 
-.notes_box {
-      width: 100%;
-      padding: 24rpx 24rpx 0 24rpx;
-      display: flex;
-      box-sizing: border-box;
-}
 
-.notes {
-      width: 100%;
-      background: rgb(238, 238, 238);
-      color: #aaa;
-      padding: 20rpx 20rpx 10rpx 20rpx;
-      border-radius: 10rpx;
-      display: flex;
-      box-sizing: border-box;
-      flex-direction: column;
-}
-
-.notes_text {
-      letter-spacing: 2rpx;
-      font-size: 28rpx;
-      line-height: 45rpx;
-      padding-bottom: 10rpx;
-}
 
 .time_box {
       width: 100%;
