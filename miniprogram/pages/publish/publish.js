@@ -47,48 +47,14 @@ Page({
       initial() {
             let that = this;
             that.setData({
-                  dura: 30,
+                  selectedCategory: '',
+                  isProductOrDemand: '',
+                  details: '',
+                  contactInfo: '',
+                  images: [],
                   price: '',
-                  place: '',
-                  chooseDelivery: 0,
-                  cids: '-1', //学院选择的默认值
-                  isbn: '',
-                  chooseCollege: false,
-                  note_counts: 0,
-                  notes: '',
-                  kindid: 0,
-                  kind: [{
-                        name: '通用',
-                        id: 0,
-                        check: true,
-                  }, {
-                        name: '专业',
-                        id: 1,
-                        check: false
-                  }],
-                  delivery: [{
-                        name: '自提',
-                        id: 0,
-                        check: true,
-                  }, {
-                        name: '帮送',
-                        id: 1,
-                        check: false
-                  }],
-                  selectedCategory: '', // 清除选中的类别
-                  isProductOrDemand: '', // 清除选择的商品或需求类型
-                  
-                  details: '', // 清除详情信息输入
-                  contactInfo: '', // 清除联系方式输入
-                  images: [], // 清除已上传的图片路径数组
-                  dura: 30,
-                  show_a: true, // 初始显示步骤一
-                  show_b: false, // 初始不显示步骤二
-                  show_c: false,// 初始不显示步骤三
-                  active: 0, // 初始激活步骤一
-                  
-                  
-            })
+                  dura: 30
+            });
       },
       onLoad() {
             this.initial();
