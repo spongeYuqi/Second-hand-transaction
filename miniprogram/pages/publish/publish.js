@@ -47,14 +47,17 @@ Page({
       initial() {
             let that = this;
             that.setData({
+                  price: '',
                   selectedCategory: '',
                   isProductOrDemand: '',
                   details: '',
                   contactInfo: '',
                   images: [],
-                  price: '',
-                  dura: 30
-            });
+                  show_a: true, // 初始显示步骤一
+                  show_b: false, // 初始不显示步骤二
+                  show_c: false,// 初始不显示步骤三
+                  active: 0 // 初始激活步骤一
+            })
       },
       onLoad() {
             this.initial();
