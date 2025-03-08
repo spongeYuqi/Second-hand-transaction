@@ -9,19 +9,17 @@
       width: 100%;
       display: flex;
       justify-content: center;
+      height: 600rpx; /* 假设将高度加大到600rpx，可根据实际需求调整 */
 }
 
 .top_img image {
-      width: 300rpx;
-      height: 300rpx;
+      width: 100%;
+      height: 600rpx;
+      display: block;
+      margin: 0 auto;
 }
 
-.title {
-      padding-top: 30rpx;
-      font-size: 32rpx;
-      font-weight: 600;
-      letter-spacing: 2rpx;
-}
+
 
 .author {
       padding-top: 10rpx;
@@ -31,15 +29,46 @@
 }
 
 .price_box {
-      margin-top: 20rpx;
-      display: flex;
-      align-items: flex-end;
-}
-
-.now_price {
-      font-size: 34rpx;
-      color: rgb(255, 1, 1);
-}
+      margin-top: 50rpx;
+      position: relative; /* 父容器需要相对定位 */
+      padding: 0 10rpx; /* 添加一些左右内边距 */
+      display: flex; /* 保持flex布局以方便其他潜在的样式需求 */
+  }
+  
+  .now_price, .publish_type, .category {
+      font-size: 34rpx; /* 可以根据需要统一或单独设定字体大小 */
+      position: absolute; /* 使用绝对定位 */
+      top: 50%; /* 垂直居中，可以根据具体高度调整 */
+      transform: translateY(-50%); /* 结合top使用，实现精确垂直居中 */
+  }
+  
+  .now_price {
+      left: 10rpx; /* 距离左边的距离 */
+      color: rgb(255, 1, 1); /* 特定于now_price的颜色 */
+      font-size: 34rpx; /* 特定于now_price的字体大小 */
+  }
+  
+  .publish_type {
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      width: fit-content; /* 根据内容自动调整宽度 */
+      font-size: 30rpx;
+      border: 2px solid #fbbd08;
+      padding: 3px;
+      border-radius: 8px;
+      display: inline-block;
+  }
+  
+  .category {
+      right: 10rpx; /* 距离右边的距离 */
+      font-size: 30rpx;
+      border: 2px solid #fbbd08;
+      padding: 3px;
+      border-radius: 8px;
+      display: inline-block;
+  }
 
 .pre_price {
       padding-left: 30rpx;
@@ -77,7 +106,7 @@
       font-size: 32rpx;
       font-weight: 600;
       color: #000;
-      border-bottom: 4rpx solid #fbbd08;
+      border-bottom: 1rpx solid #fbbd08;
 }
 
 .user_box {
@@ -137,10 +166,7 @@
       justify-content: space-between;
 }
 
-.kind {
-      font-size: 28rpx;
-      letter-spacing: 2rpx;
-}
+
 
 .time {
       font-size: 28rpx;
@@ -148,87 +174,27 @@
       color: #8c9aa8;
 }
 
-.deliver_box {
-      width: 100%;
-      padding: 24rpx 24rpx 0 24rpx;
-      display: flex;
+
+
+.detail_box {
+      padding: 20rpx;
       box-sizing: border-box;
-      justify-content: space-between;
-}
-
-.deliver_first {
-      display: flex;
-      align-items: center;
-}
-
-.deliver_title {
-      font-size: 28rpx;
-      letter-spacing: 2rpx;
-}
-
-.deliver_kind {
-      font-size: 28rpx;
-      letter-spacing: 2rpx;
-      color: #a5a5a5;
-}
-
-.deliver_place {
-      font-size: 28rpx;
-      letter-spacing: 2rpx;
-}
-
-.palceInput_box {
-      width: 100%;
-      padding: 24rpx 24rpx 0 24rpx;
-      display: flex;
-      box-sizing: border-box;
-      justify-content: center;
-}
-
-.palceInput_box input {
-      width: 100%;
-      height: 66rpx;
-      border: 1rpx solid #eee;
-      border-radius: 10rpx;
+      background: #fff;
+      /* 减少宽度，使其不完全铺满 */
+      width: 95%; /* 你可以根据需要调整这个百分比 */
+      max-width: 800rpx; /* 可选：设置最大宽度，防止内容区域过宽 */
+      /* 使用auto的左右外边距值使盒子水平居中 */
+      margin: 24rpx auto; /* 上下24rpx的外边距，左右自动计算以达到居中效果 */
+      border: 2rpx solid #ccc; /* 灰色边框 */
+      border-radius: 16rpx; /* 圆角的大小可以根据需要调整 */
+  }
+  
+  .detail_content {
       font-size: 26rpx;
-      padding: 0 20rpx;
-      letter-spacing: 2rpx;
-}
-
-.detail_contain {
-      width: 100%;
-      padding: 24rpx;
-      display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
-}
-
-.detail_card {
-      display: flex;
-      width: 100%;
-      box-sizing: border-box;
-      padding: 30rpx 0;
-      justify-content: space-between;
-}
-
-.detail_border {
-      border-bottom: 1rpx solid #eee;
-}
-
-.detail_title {
-      width: 20%;
-      font-size: 28rpx;
-      letter-spacing: 2rpx;
-      line-height: 45rpx;
-}
-
-.detail_content {
-      width: 78%;
-      font-size: 27rpx;
-      letter-spacing: 2rpx;
-      line-height: 44rpx;
-      color: #616161;
-}
+      color: #000000;
+      line-height: 1.6;
+      margin-bottom: 2rpx;
+  }
 
 /*底部导航*/
 

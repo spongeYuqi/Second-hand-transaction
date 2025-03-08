@@ -1,6 +1,6 @@
 var data = {
       //云开发环境id
-      env: 'zf-shcud',
+      env: 'cloud1-2g1a3bn549ab3098',
       //分享配置
       share_title: '科大二手仓',
       share_img: '/images/sharehaoy.png', //可以是网络地址，本地文件路径要填绝对位置
@@ -87,6 +87,18 @@ var data = {
             
             
       ],
+      //校区
+      gender: [{
+            name: '男',
+            id: 0
+      },
+      {
+            name: '女',
+            id: 1
+      },
+      
+      
+],
       //配置学院，建议不要添加太多，不然前端不好看
       college: [{
                   name: '书籍',

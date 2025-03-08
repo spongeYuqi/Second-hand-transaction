@@ -29,7 +29,8 @@ Page({
                   success(e) {
                         that.setData({
                               creatTime: config.formTime(e.data[0].creat),
-                              detail: e.data[0]
+                              detail: e.data[0],
+                              images: e.data[0].images
                         })
                         that.getBuyer(e.data[0]._openid);
                   },

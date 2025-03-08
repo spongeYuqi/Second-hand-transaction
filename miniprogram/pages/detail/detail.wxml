@@ -1,39 +1,41 @@
 <wxs src="../../common.wxs" module="morejs" />
-<view class="top_contain">
-      <view class="top_img">
-            <image lazy-load src="/images/测验.png"></image>
-      </view>
-      
-      
-      <view class="price_box">
-            <view class="now_price">￥30.00元</view>
-            
+<view class="top_contain" style="height: 530rpx; display: flex; box-sizing: border-box">
+      <swiper class="top_img" indicator-dots="true" autoplay="true" interval="3000" duration="500" style="height: 420rpx; display: flex; box-sizing: border-box; width: 700rpx">
+            <block wx:for="{{images}}" wx:key="index">
+                  <swiper-item>
+                        <image lazy-load src="{{item}}" mode="aspectFill"></image>
+                  </swiper-item>
+            </block>
+      </swiper>
+      <view class="price_box" style="position: relative; left: -1rpx; top: -6rpx">
+            <view class="now_price">￥{{price}}元</view>
+            <view class="publish_type">{{publishType}}</view>
+            <view class="category">{{category}}</view>
       </view>
 </view>
-<view class="blank"></view>
+<view class="blank" style="height: 27rpx; display: block; box-sizing: border-box"></view>
 <view class="center_contain">
-  <view class="c_title title_on">发布详情</view>    
+      <view class="c_title title_on">发布详情</view>
 </view>
-<!--发布信息-->
-
-      <view class="user_box">
-            <image lazy-load src="/images/测验.png"></image>
-            <view class="des_box">
-                  <view class="user_name">狐疑欧尼</view>
-                  
-            </view>
-            <view class="sex">
-                  <image lazy-load src="{{userinfo.info.gender==0?'/images/none.png':(userinfo.info.gender==1?'/images/girl.png':'/images/boy.png')}}"></image>
-            </view>
+<!-- 发布信息 -->
+<view class="user_box">
+      <image lazy-load src="/images/测验.png"></image>
+      <view class="des_box" style="width: 204rpx; display: flex; box-sizing: border-box">
+            <view class="user_name" style="position: relative; left: -29rpx; top: -1rpx">狐疑欧尼</view>
       </view>
-      <view class="time_box">
-            <!-- <view class="kind">{{collegeName.name}}类书</view> -->
-            <view class="time">发布于2025年3月5日</view>
+      <view class="sex">
+            <image lazy-load src="{{userinfo.info.gender==0?'/images/none.png':(userinfo.info.gender==1?'/images/girl.png':'/images/boy.png')}}" style="position: relative; left: -195rpx; top: 0rpx"></image>
       </view>
-  
-
+      <view class="contact" style="margin-left: 20rpx;">{{contactInfo}}</view>
+</view>
+<view class="detail_box">
+      <view class="detail_content">{{details}}</view>
+</view>
+<view class="time_box">
+      <view class="time">发布于{{createtime}}</view>
+</view>
 <view style="height: 96rpx;"></view>
-<!--底部导航-->
+<!-- 底部导航 -->
 <view class="tabbar">
       <view class="t_card">
             <image src="/images/home.png"></image>
@@ -46,14 +48,14 @@
             <text>分享</text>
             <button class="t_button" open-type="share"></button>
       </view>
-     
       <view class="buy_box">
-            <view class="buy shadow" bindtap="buy">{{publishinfo.status==0?'立即购买':'刚刚被抢光了'}}</view>
+            <view class="buy shadow" bindtap="buy" style="width: 260rpx; display: flex; box-sizing: border-box">
+                  {{publishinfo.status==0?'立即购买':'刚刚被抢光了'}}
+            </view>
       </view>
 </view>
-
-<!--悬浮客服功能-->
+<!-- 悬浮客服功能 -->
 <view class="contact_box" bindtap="go" data-go="/pages/kefu/kefu" animation="{{animationKefuData}}">
-     <image src="/images/ww.jpg" ></image>
-     <view >反馈</view>
+      <image src="/images/ww.jpg"></image>
+      <view>反馈</view>
 </view>

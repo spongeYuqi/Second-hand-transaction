@@ -211,21 +211,42 @@ onPriceInput(event) {
     return;
   }
 
-  // 检查是否以小数点开头，并且后面跟着数字，如果是，则在前面补0
-  if (/^\.\d+$/.test(value)) {
-    value = '0' + value; // 在前面加上0
-  } else if (value.includes('.')) { // 如果包含小数点，分别处理整数和小数部分
+  // 检查并处理输入值
+  if (/^\.\d$/.test(value)) { // 如果以单个小数点开头并跟随一个数字，在前面补0
+    value = '0' + value;
+  } else if (value.includes('.')) { // 包含小数点的情况
     const [integerPart, decimalPart] = value.split('.');
-    // 只有当整数部分不为0或空时才进行parseInt转换
-    const formattedIntegerPart = integerPart !== '0' && integerPart !== '' ? parseInt(integerPart, 10).toString() : '0';
+    
+    // 整数部分不能超过4位
+    let formattedIntegerPart = integerPart;
+    if (integerPart.length > 4) {
+      formattedIntegerPart = integerPart.substring(0, 4); // 只保留前4位
+    }
+    // 小数部分不能超过1位
+    let formattedDecimalPart = decimalPart.length > 1 ? decimalPart.substring(0, 1) : decimalPart;
+
     // 合并整数和小数部分
-    value = formattedIntegerPart + '.' + decimalPart;
-  } else { // 对于没有小数点的部分，仅当其不是0时才进行转换
-    value = value !== '0' ? parseInt(value, 10).toString() : value;
+    value = formattedIntegerPart + '.' + formattedDecimalPart;
+  } else { // 不包含小数点的部分
+    // 整数部分长度限制为4位
+    if (value.length > 4) {
+      value = value.substring(0, 4); // 只保留前4位
+    }
+    value = parseInt(value, 10).toString(); // 转换为整数后转回字符串
   }
 
   // 更新价格数据
-  this.setData({ price: value });
+  this.setData({ price: value }, () => {
+    // 确保即使输入不合规，界面也反映正确的值
+    const currentPrice = this.data.price;
+    if (currentPrice && currentPrice.includes('.')) {
+      const [integerPart, decimalPart] = currentPrice.split('.');
+      if (decimalPart.length > 1) {
+        // 如果小数部分超过了1位，则调整它
+        this.setData({ price: `${integerPart}.${decimalPart.substring(0, 1)}` });
+      }
+    }
+  });
 },
 
 goToPreviousStep: function() {
@@ -241,10 +262,8 @@ goToPreviousStep: function() {
 // 发布逻辑
 publish() {
   let that = this;
-  console.log('Title:', that.data.title);
-  console.log('Price:', that.data.price);
-  console.log('Contact Info:', that.data.contactInfo);
-  if (!that.data.details || that.data.details.length > 20 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
+ 
+  if (!that.data.details || that.data.details.length > 200 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
     wx.showToast({
       title: '请检查详情、价格或联系方式',
       icon: 'none'
@@ -256,8 +275,7 @@ publish() {
     content: '请确保您填写的信息无误，是否马上发布？',
     success(res) {
       if (res.confirm) {
-        wx.cloud.init()
-        const db = wx.cloud.database()
+       
         db.collection('publish').add({
           data: {
             type: that.data.isProductOrDemand,
@@ -279,6 +297,7 @@ publish() {
             wx.pageScrollTo({ scrollTop: 0 });
           },
           fail(err) {
+            console.error('发布失败:', err);
             wx.showToast({
               title: '发布失败，请重试',
               icon: 'none'

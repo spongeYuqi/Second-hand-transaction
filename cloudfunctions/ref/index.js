@@ -1,6 +1,6 @@
 const config = {
-      appid: 'wx383426ad9ffe1075', //小程序Appid
-      envName: 'zf-shcud', // 小程序云开发环境ID
+      appid: 'wx795ebcd914fb5456', //小程序Appid
+      envName: 'cloud1-2g1a3bn549ab3098', // 小程序云开发环境ID
       mchid: '1111111111', //商户号
       partnerKey: '1111111111111111111111', //此处填服务商密钥
       pfx: '', //证书初始化

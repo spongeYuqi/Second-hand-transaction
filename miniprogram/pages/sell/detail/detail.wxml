@@ -3,7 +3,13 @@
             <image class="top_over" src="/images/over.png"></image>
             <image class="bot_over" src="/images/over.png"></image>
             <view class="goods_box">
-                  <image class="goods_img" src="{{detail.bookinfo.pic}}"></image>
+                  <swiper class="goods_swiper" indicator-dots="true" autoplay="false" interval="5000" duration="500">
+  <block wx:for="{{detail.images}}" wx:key="index">
+    <swiper-item>
+      <image class="goods_img" src="{{item}}" mode="aspectFill"></image>
+    </swiper-item>
+  </block>
+</swiper>
                   
                   <view class="goods_price">￥{{detail.price}}元</view>
             </view>

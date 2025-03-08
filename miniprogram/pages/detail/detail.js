@@ -27,9 +27,18 @@ Page({
             let that = this;
             db.collection('publish').doc(e).get({
                   success: function(res) {
+                        const createDate = new Date(res.data.createTime);
+                        const formattedDate = `${createDate.getFullYear()}-${createDate.getMonth() + 1}-${createDate.getDate()} ${createDate.getHours()}:${createDate.getMinutes()}`;
                         that.setData({
                               collegeName: JSON.parse(config.data).college[parseInt(res.data.collegeid) + 1],
-                              publishinfo: res.data
+                              publishinfo: res.data,
+                              publishType: res.data.type == 'demand' ? '需求':'商品' ,
+                              category: res.data.category,
+                              details: res.data.details,
+                              contactInfo: res.data.contactInfo,
+                              images: res.data.images,
+                              price: res.data.price,
+                              createtime: formattedDate
                         })
                         // that.getSeller(res.data._openid, res.data.bookinfo._id)
                         that.getSeller(res.data._openid)
@@ -135,7 +144,7 @@ Page({
                               animationKefuData: animationKefuData.export(),
                         })
                         ++ii;
-                  console.log(ii);
+
             }.bind(that), 1800);
       },
       onReady() {
