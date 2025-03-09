@@ -22,7 +22,7 @@
 <picker mode="selector" range="{{categories}}" range-key="name" value="{{selectedCategoryIndex}}" bindchange="chooseCategory">
   <!-- 应用了新增的 a_picker_large 样式类 -->
   <view class="a_picker">
-    请选择发布类别：{{selectedCategory}}
+    点此选择类别：{{selectedCategory}}
   </view>
 </picker>
     <view class="a_confirm" bindtap="confirm">确认</view>

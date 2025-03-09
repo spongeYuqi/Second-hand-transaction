@@ -115,46 +115,57 @@
       display: flex;
       padding: 24rpx;
       align-items: center;
-      justify-content: space-between;
       box-sizing: border-box;
-}
-
-.user_box image {
+      position: relative; /* 添加相对定位 */
+  }
+  
+  .avatar {
       width: 100rpx;
       height: 100rpx;
       border-radius: 50%;
-}
-
-.des_box {
-      height: 100%;
-      width: 450rpx;
+      margin-right: 16rpx; /* 给头像右边一些空间 */
+      border: 2px solid #fbbd08;
+      object-fit: cover; /* 确保图像覆盖整个圆形区域 */
+  }
+  
+  .details {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      justify-content: space-around;
-      padding: 10rpx 0;
-}
-
-.user_name {
-      font-size: 32rpx;
-      letter-spacing: 2rpx;
-}
-
-
-
-.sex {
-      width: 100rpx;
+      justify-content: space-between;
       height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-}
+      margin-right: auto; /* 让联系信息靠右 */
+  }
+  
+  .sex {
+      
+      margin-left: 1rpx; /* 如果需要的话，可以让性别图标与昵称间有一些空间 */
+  }
+  
+  .sex image {
+      width: 40rpx;
+      height: 40rpx;
+      border-radius: 90%;
+  }
+  
+  .des_box {
+      margin-bottom: 4rpx; /* 调整昵称与性别图标之间的距离 */
+  }
+  
+  .user_name {
+      font-size: 25rpx;
+      letter-spacing: 2rpx;
+      border: 1px solid #ccc;
+      padding: 3px;
+      border-radius: 8px;
+  }
 
-.sex image {
-      width: 50rpx;
-      height: 50rpx;
-      border-radius: 50%;
-}
+  .contact {
+      font-size: 28rpx;
+      position: absolute; /* 绝对定位 */
+      right: 24rpx; /* 距离右侧的距离，可以根据需要调整 */
+      top: 50%; /* 将顶部边距设为父容器高度的一半 */
+      transform: translateY(-50%); /* 使用transform将元素向上移动自身高度的一半，实现垂直居中 */
+  }
 
 
 
@@ -184,13 +195,13 @@
       width: 95%; /* 你可以根据需要调整这个百分比 */
       max-width: 800rpx; /* 可选：设置最大宽度，防止内容区域过宽 */
       /* 使用auto的左右外边距值使盒子水平居中 */
-      margin: 24rpx auto; /* 上下24rpx的外边距，左右自动计算以达到居中效果 */
+      margin: 3rpx auto; /* 上下24rpx的外边距，左右自动计算以达到居中效果 */
       border: 2rpx solid #ccc; /* 灰色边框 */
       border-radius: 16rpx; /* 圆角的大小可以根据需要调整 */
   }
   
   .detail_content {
-      font-size: 26rpx;
+      font-size: 28rpx;
       color: #000000;
       line-height: 1.6;
       margin-bottom: 2rpx;

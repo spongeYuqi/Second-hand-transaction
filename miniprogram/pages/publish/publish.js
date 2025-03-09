@@ -26,7 +26,7 @@ Page({
               { name: '书籍资料', days: 60 },
               { name: '学习用具', days: 60 },
               { name: '数码产品', days: 45 },
-              { name: '衣物配饰', days: 45 },
+              { name: '衣饰化妆', days: 45 },
               { name: '运动器材', days: 45 },
               { name: '寝具用品', days: 45 },
               { name: '委托合作', days: 3 },
@@ -80,29 +80,34 @@ chooseCategory(e) {
 
       
       confirm() {
+        console.log("开始执行 confirm 方法");
+        console.log("当前的 openid: ", app.openid);
             let that = this;
+           
             if (!that.data.isProductOrDemand || !that.data.selectedCategory) {
               wx.showToast({
                 title: '请选择发布类型和类别',
                 icon: 'none'
               });
+              
               return false;
             }
-            // if (!app.openid) {
-            //       wx.showModal({
-            //             title: '温馨提示',
-            //             content: '该功能需要注册方可使用，是否马上去注册',
-            //             success(res) {
-            //                   if (res.confirm) {
-            //                         wx.navigateTo({
-            //                               url: '/pages/login/login',
-            //                         })
-            //                   }
-            //             }
-            //       })
-            //       return false
-            // }
-            // that.get_book(isbn);
+            if (!app.openid) {
+                  wx.showModal({
+                        title: '温馨提示',
+                        content: '该功能需要注册方可使用，是否马上去注册',
+                        success(res) {
+                              if (res.confirm) {
+                                    wx.navigateTo({
+                                          url: '/pages/login/login',
+                                    })
+                              }
+                        }
+                  })
+                  return false
+            }
+            console.log("所有条件已满足，准备继续执行");
+            
               // 直接进入下一步骤，模拟已登录状态
   that.setData({
     show_a: false,
@@ -262,49 +267,85 @@ goToPreviousStep: function() {
 // 发布逻辑
 publish() {
   let that = this;
- 
-  if (!that.data.details || that.data.details.length > 200 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
+
+  // 检查是否已经获取了用户的openid
+  if (!app.openid) {
     wx.showToast({
-      title: '请检查详情、价格或联系方式',
+      title: '请先登录',
       icon: 'none'
     });
-    return false;
+    return;
   }
-  wx.showModal({
-    title: '温馨提示',
-    content: '请确保您填写的信息无误，是否马上发布？',
-    success(res) {
-      if (res.confirm) {
-       
-        db.collection('publish').add({
-          data: {
-            type: that.data.isProductOrDemand,
-            category: that.data.selectedCategory,
-            details: that.data.details,
-            contactInfo: that.data.contactInfo,
-            images: that.data.images,
-            price: that.data.price,
-            createTime: db.serverDate()
-          },
-          success(e) {
-            that.setData({
-              show_a: false,
-              show_b: false,
-              show_c: true,
-              active: 2,
-              detail_id: e._id
-            });
-            wx.pageScrollTo({ scrollTop: 0 });
-          },
-          fail(err) {
-            console.error('发布失败:', err);
-            wx.showToast({
-              title: '发布失败，请重试',
-              icon: 'none'
-            })
+
+  // 使用openid从user集合中获取用户的昵称
+  db.collection('user').where({
+    _openid: app.openid
+  }).get({
+    success: function(res) {
+      if (res.data.length > 0) { // 确保找到了用户数据
+        const nickname = res.data[0].Nickname; // 假设字段名为Nickname，请根据实际情况修改
+        const xinbie = res.data[0].gender.id;
+        // 继续进行发布的逻辑
+        if (!that.data.details || that.data.details.length > 200 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
+          wx.showToast({
+            title: '请检查详情、价格或联系方式',
+            icon: 'none'
+          });
+          return false;
+        }
+        wx.showModal({
+          title: '温馨提示',
+          content: '请确保您填写的信息无误，是否马上发布？',
+          success(res) {
+            if (res.confirm) {
+              db.collection('publish').add({
+                data: {
+                  type: that.data.isProductOrDemand,
+                  category: that.data.selectedCategory,
+                  details: that.data.details,
+                  contactInfo: that.data.contactInfo,
+                  images: that.data.images,
+                  price: that.data.price,
+                  createTime: db.serverDate(),
+                  nickname: nickname, // 添加用户昵称
+                  openid: app.openid, // 确保openid也被上传
+                  gender: xinbie,
+                  campus: that.data.campus,
+                },
+                success(e) {
+                  that.setData({
+                    show_a: false,
+                    show_b: false,
+                    show_c: true,
+                    active: 2,
+                    detail_id: e._id
+                  });
+                  wx.pageScrollTo({ scrollTop: 0 });
+                },
+                fail(err) {
+                  console.error('发布失败:', err);
+                  wx.showToast({
+                    title: '发布失败，请重试',
+                    icon: 'none'
+                  })
+                }
+              })
+            }
           }
-        })
+        });
+      } else {
+        wx.showToast({
+          title: '未找到用户信息，请检查登录状态',
+          icon: 'none'
+        });
       }
+    },
+    fail: function(err) {
+      console.error('获取用户信息失败:', err);
+      wx.showToast({
+        title: '获取用户信息失败，请稍后再试',
+        icon: 'none'
+      });
     }
   });
 },

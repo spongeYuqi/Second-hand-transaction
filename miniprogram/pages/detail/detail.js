@@ -38,38 +38,18 @@ Page({
                               contactInfo: res.data.contactInfo,
                               images: res.data.images,
                               price: res.data.price,
-                              createtime: formattedDate
+                              createtime: formattedDate,
+                              username: res.data.nickname,
+                              genderId: res.data.gender,
+                           
                         })
                         // that.getSeller(res.data._openid, res.data.bookinfo._id)
                         that.getSeller(res.data._openid)
                   }
             })
       },
-      //获取卖家信息
-      getSeller(m, n) {
-            let that = this;
-            db.collection('user').where({
-                  _openid: m
-            }).get({
-                  success: function(res) {
-                        that.setData({
-                              userinfo: res.data[0]
-                        })
-                        that.getBook(n)
-                  }
-            })
-      },
-      // //获取书本信息
-      // getBook(e) {
-      //       let that = this;
-      //       db.collection('books').doc(e).get({
-      //             success: function(res) {
-      //                   that.setData({
-      //                         bookinfo: res.data
-      //                   })
-      //             }
-      //       })
-      // },
+      
+    
       //回到首页
       home() {
             wx.switchTab({

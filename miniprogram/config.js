@@ -87,14 +87,17 @@ var data = {
             
             
       ],
-      //校区
+
+      //性别
       gender: [{
-            name: '男',
+            name: '女',
             id: 0
+            
       },
       {
-            name: '女',
+            name: '男',
             id: 1
+            
       },
       
       
@@ -113,7 +116,7 @@ var data = {
                   id: 1
             },
             {
-                  name: '衣饰',
+                  name: '衣妆',
                   id: 2
             },
             {

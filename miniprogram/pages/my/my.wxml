@@ -1,11 +1,13 @@
 <view class="top_box">
       <view class="top_1">
-            <view wx:if="{{!userinfo}}" class="top_1_1" bindtap="go" data-go="/pages/login/login">点击登录</view>
-            <view wx:if="{{userinfo}}" class="top_1_1">
-                  <open-data type="userNickName"></open-data>
+            <view wx:if="{{!userinfo}}" class="top_1_1" bindtap="go" data-go="/pages/login/login">
+                  点击登录
             </view>
+            <view wx:if="{{userinfo}}" class="top_1_1">{{userinfo.Nickname}}</view>
             <view class="top_1_2" wx:if="{{!userinfo}}">一秒登录，体验所有功能</view>
-             <view class="top_1_2" wx:if="{{userinfo}}" bindtap="go" data-go="/pages/edit/edit" data-status="1">点击修改资料</view>
+            <view class="top_1_2" wx:if="{{userinfo}}" bindtap="go" data-go="/pages/edit/edit" data-status="1">
+                  点击修改资料
+            </view>
       </view>
       <view class="top_2">
             <view class="avator">
@@ -67,8 +69,7 @@
             <image src="/images/go.png"></image>
       </view>
 </view>
-
-<!--分享弹出层-->
+<!-- 分享弹出层 -->
 <van-popup show="{{ showShare }}" bind:close="closePop">
       <view class="share_contain">
             <view class="share_border"></view>

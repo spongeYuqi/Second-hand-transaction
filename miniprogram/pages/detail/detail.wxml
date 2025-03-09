@@ -19,14 +19,16 @@
 </view>
 <!-- 发布信息 -->
 <view class="user_box">
-      <image lazy-load src="/images/测验.png"></image>
-      <view class="des_box" style="width: 204rpx; display: flex; box-sizing: border-box">
-            <view class="user_name" style="position: relative; left: -29rpx; top: -1rpx">狐疑欧尼</view>
+      <image lazy-load src="/images/ttou.jpg" class="avatar"></image>
+      <view class="details">
+            <view class="sex">
+                  <image lazy-load src="{{genderId==0?'/images/girl.png':'/images/boy.png'}}"></image>
+            </view>
+            <view class="des_box">
+                  <view class="user_name">{{username}}</view>
+            </view>
       </view>
-      <view class="sex">
-            <image lazy-load src="{{userinfo.info.gender==0?'/images/none.png':(userinfo.info.gender==1?'/images/girl.png':'/images/boy.png')}}" style="position: relative; left: -195rpx; top: 0rpx"></image>
-      </view>
-      <view class="contact" style="margin-left: 20rpx;">{{contactInfo}}</view>
+      <view class="contact">{{contactInfo}}</view>
 </view>
 <view class="detail_box">
       <view class="detail_content">{{details}}</view>
