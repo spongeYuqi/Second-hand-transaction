@@ -3,7 +3,7 @@
       <swiper class="top_img" indicator-dots="true" autoplay="true" interval="3000" duration="500" style="height: 420rpx; display: flex; box-sizing: border-box; width: 700rpx">
             <block wx:for="{{images}}" wx:key="index">
                   <swiper-item>
-                        <image lazy-load src="{{item}}" mode="aspectFill"></image>
+                        <image lazy-load src="{{item}}" mode="aspectFill" bindtap="previewImage" data-index="{{index}}"></image>
                   </swiper-item>
             </block>
       </swiper>

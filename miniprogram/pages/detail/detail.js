@@ -29,6 +29,9 @@ Page({
     success: function(res) {
       const createDate = new Date(res.data.createTime);
       const formattedDate = `${createDate.getFullYear()}-${(createDate.getMonth() + 1).toString().padStart(2, '0')}-${createDate.getDate().toString().padStart(2, '0')} ${createDate.getHours().toString().padStart(2, '0')}:${createDate.getMinutes().toString().padStart(2, '0')}`;
+      // 设置默认图片，假设默认图片位于项目的根目录下名为'sharehaoy.png'
+      const images = res.data.images && res.data.images.length > 0 ? res.data.images : ['/images/sharehaoy.png'];
+      
       // 获取发布者信息
       db.collection('user').where({
         _openid: res.data._openid // 使用发布者的 openid 来查找用户信息
@@ -37,13 +40,13 @@ Page({
           if (userRes.data.length > 0) {
             const userInfo = userRes.data[0];
             that.setData({
-              collegeName: JSON.parse(config.data).college[parseInt(res.data.collegeid) + 1],
+              //collegeName: JSON.parse(config.data).college[parseInt(res.data.collegeid) + 1],
               publishinfo: res.data,
               publishType: res.data.type == 'demand' ? '需求':'商品',
               category: res.data.category,
               details: res.data.details,
               contactInfo: res.data.contactInfo,
-              images: res.data.images,
+              images: images,
               price: res.data.price,
               createtime: formattedDate,
               username: res.data.nickname,
@@ -56,6 +59,16 @@ Page({
     }
   })
 },
+// 预览图片的方法
+previewImage(e) {
+      const index = e.currentTarget.dataset.index;
+      const images = this.data.images;
+
+      wx.previewImage({
+          current: images[index], // 当前显示图片的http链接
+          urls: images // 需要预览的图片http链接列表
+      });
+  },
       
     
       //回到首页

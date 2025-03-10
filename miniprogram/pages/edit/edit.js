@@ -111,7 +111,8 @@ Page({
     }
 
     db.collection('user').where({
-      Nickname: username
+      Nickname: username,
+      _openid: db.command.neq(app.openid) // 确保查询时不包括当前用户的_openid
     }).get({
       success: function(res) {
         if (res.data.length > 0) {

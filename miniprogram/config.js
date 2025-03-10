@@ -2,7 +2,7 @@ var data = {
       //云开发环境id
       env: 'cloud1-2g1a3bn549ab3098',
       //分享配置
-      share_title: '科大二手仓',
+      share_title: '校园二手仓',
       share_img: '/images/sharehaoy.png', //可以是网络地址，本地文件路径要填绝对位置
       share_poster:'https://mmbiz.qpic.cn/sz_mmbiz_png/apmX6EUWe20TYicbibeicAoiaH0jlL3FMn63WvXPd4eSraz8ibMrN83U7ug6iagYcGwqDHj3bMicwr2apuntwaV7ykdGQ/640?wx_fmt=png&amp;from=appmsg',//必须为网络地址
       //客服联系方式
@@ -15,7 +15,7 @@ var data = {
       //默认启动页背景图，防止请求失败完全空白 
       //可以是网络地址，本地文件路径要填绝对位置
       bgurl: '/images/startaa.png',
-      //校区
+      //学院
       campus: [{
                   name: '矿业工程学院',
                   id: 0
@@ -41,48 +41,44 @@ var data = {
                   id: 5
             },
             {
-                  name: '机械工程学院',
+                  name: '材料科学与工程学院',
                   id: 6
             },
             {
-                  name: '材料科学与工程学院',
+                  name: '建筑工程学院',
                   id: 7
             },
             {
-                  name: '建筑工程学院',
+                  name: '计算机与信息工程学院',
                   id: 8
             },
             {
-                  name: '计算机与信息工程学院',
+                  name: '管理学院',
                   id: 9
             },
             {
-                  name: '管理学院',
+                  name: '经济学院',
                   id: 10
             },
             {
-                  name: '经济学院',
+                  name: '人文社会科学学院',
                   id: 11
             },
             {
-                  name: '人文社会科学学院',
+                  name: '马克思主义学院',
                   id: 12
             },
             {
-                  name: '马克思主义学院',
+                  name: '理学院',
                   id: 13
             },
             {
-                  name: '理学院',
+                  name: '外国语学院',
                   id: 14
             },
             {
-                  name: '外国语学院',
-                  id: 15
-            },
-            {
                   name: '研究生学院',
-                  id: 16
+                  id: 15
             },
             
             
@@ -102,7 +98,7 @@ var data = {
       
       
 ],
-      //配置学院，建议不要添加太多，不然前端不好看
+      //配置类别，建议不要添加太多，不然前端不好看
       college: [{
                   name: '书籍',
                   id: -1

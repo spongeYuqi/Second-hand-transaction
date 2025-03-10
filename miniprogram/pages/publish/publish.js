@@ -23,17 +23,18 @@ Page({
                   },
             ],
             categories: [
-              { name: '书籍资料', days: 60 },
-              { name: '学习用具', days: 60 },
-              { name: '数码产品', days: 45 },
-              { name: '衣饰化妆', days: 45 },
-              { name: '运动器材', days: 45 },
-              { name: '寝具用品', days: 45 },
-              { name: '委托合作', days: 3 },
-              { name: '其他', days: 30 }
+              { name: '书籍资料', days: 60 , id: -1 },
+              { name: '学习用具', days: 60 , id: 0  },
+              { name: '数码产品', days: 45 , id: 1  },
+              { name: '衣饰化妆', days: 45 , id: 2  },
+              { name: '运动器材', days: 45 , id: 3  },
+              { name: '寝具用品', days: 45 , id: 4  },
+              { name: '委托合作', days: 3 , id: 5   },
+              { name: '其他', days: 30 , id: 6 }
             ],
             selectedCategory: '', // 存储用户选择的类别
             isProductOrDemand: '', // 存储用户选择的商品或需求
+            cids: '-1', //学院选择的默认值
             dura: 0, // 根据选择自动设定
             details: '', // 新增详情信息输入
             contactInfo: '', // 新增联系方式输入
@@ -50,6 +51,7 @@ Page({
                   price: '',
                   selectedCategory: '',
                   isProductOrDemand: '',
+                  cids: '-1', //学院选择的默认值
                   details: '',
                   contactInfo: '',
                   images: [],
@@ -73,6 +75,7 @@ chooseCategory(e) {
   const categoryIndex = e.detail.value;
   const selectedCategory = this.data.categories[categoryIndex];
   this.setData({
+    cids:selectedCategory.id,
     selectedCategory: selectedCategory.name,
     dura: selectedCategory.days
   });
@@ -224,8 +227,8 @@ onPriceInput(event) {
     
     // 整数部分不能超过4位
     let formattedIntegerPart = integerPart;
-    if (integerPart.length > 4) {
-      formattedIntegerPart = integerPart.substring(0, 4); // 只保留前4位
+    if (integerPart.length > 6) {
+      formattedIntegerPart = integerPart.substring(0, 6); // 只保留前4位
     }
     // 小数部分不能超过1位
     let formattedDecimalPart = decimalPart.length > 1 ? decimalPart.substring(0, 1) : decimalPart;
@@ -234,8 +237,8 @@ onPriceInput(event) {
     value = formattedIntegerPart + '.' + formattedDecimalPart;
   } else { // 不包含小数点的部分
     // 整数部分长度限制为4位
-    if (value.length > 4) {
-      value = value.substring(0, 4); // 只保留前4位
+    if (value.length > 6) {
+      value = value.substring(0, 6); // 只保留前4位
     }
     value = parseInt(value, 10).toString(); // 转换为整数后转回字符串
   }
@@ -302,6 +305,7 @@ publish() {
                 data: {
                   type: that.data.isProductOrDemand,
                   category: that.data.selectedCategory,
+                  collegeid: that.data.cids,
                   details: that.data.details,
                   contactInfo: that.data.contactInfo,
                   images: that.data.images,
@@ -310,7 +314,8 @@ publish() {
                   nickname: nickname, // 添加用户昵称
                   openid: app.openid, // 确保openid也被上传
                   gender: xinbie,
-                  campus: that.data.campus,
+                  //campus: that.data.campus,
+                  dura: new Date().getTime() + that.data.dura * (24 * 60 * 60 * 1000),
                 },
                 success(e) {
                   that.setData({

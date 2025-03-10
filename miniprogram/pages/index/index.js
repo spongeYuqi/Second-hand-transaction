@@ -15,13 +15,15 @@ Page({
             this.listkind();
             this.getbanner();
             this.getList();
+            this.windowInfo = wx.getWindowInfo();
       },
       //监测屏幕滚动
-      onPageScroll: function(e) {
+      onPageScroll(e) {
+            const pixelRatio = this.windowInfo.pixelRatio;
             this.setData({
-                  scrollTop: parseInt((e.scrollTop) * wx.getSystemInfoSync().pixelRatio)
-            })
-      },
+                scrollTop: parseInt((e.scrollTop) * pixelRatio)
+            });
+        },
       //获取上次布局记忆
       listkind() {
             let that = this;
@@ -99,82 +101,93 @@ Page({
       },
       getList() {
             let that = this;
-            if (that.data.collegeCur == -2) {
-                  var collegeid = _.neq(-2); //除-2之外所有
-            } else {
-                  var collegeid = that.data.collegeCur + '' //小程序搜索必须对应格式
-            }
+        
             db.collection('publish').where({
-                  status: 0,
-                  dura: _.gt(new Date().getTime()),
-                  collegeid: collegeid
-            }).orderBy('creat', 'desc').limit(20).get({
-                  success: function(res) {
-                        wx.stopPullDownRefresh(); //暂停刷新动作
-                        if (res.data.length == 0) {
-                              that.setData({
-                                    nomore: true,
-                                    list: [],
-                              })
-                              return false;
-                        }
-                        if (res.data.length < 20) {
-                              that.setData({
-                                    nomore: true,
-                                    page: 0,
-                                    list: res.data,
-                              })
-                        } else {
-                              that.setData({
-                                    page: 0,
-                                    list: res.data,
-                                    nomore: false,
-                              })
-                        }
+                dura: _.gt(new Date().getTime()), // 确保活动时间大于当前时间
+                collegeid: that.data.collegeCur == -2 ? _.exists(true) : that.data.collegeCur // 根据collegeCur的值动态设置collegeid条件
+            }).orderBy('createTime', 'desc') // 确保使用正确的排序字段名
+              .limit(20)
+              .get({
+                  success(res) {
+
+        
+                      wx.stopPullDownRefresh(); // 暂停刷新动作
+                      if (res.data.length == 0) {
+                          that.setData({
+                              nomore: true,
+                              list: [],
+                          });
+                          return;
+                      }
+                      if (res.data.length < 20) {
+                          that.setData({
+                              nomore: true,
+                              page: 0,
+                              list: res.data,
+                          });
+                      } else {
+                          that.setData({
+                              page: 0,
+                              list: res.data,
+                              nomore: false,
+                          });
+                      }
+                  },
+                  fail(err) {
+                      console.error('获取列表失败 in getList:', err);
                   }
-            })
-      },
-      more() {
+              });
+        },
+        more() {
             let that = this;
             if (that.data.nomore || that.data.list.length < 20) {
-                  return false
+                return false;
             }
             let page = that.data.page + 1;
-            if (that.data.collegeCur == -2) {
-                  var collegeid = _.neq(-2); //除-2之外所有
-            } else {
-                  var collegeid = that.data.collegeCur + '' //小程序搜索必须对应格式
-            }
+            let collegeid = that.data.collegeCur == -2 ? _.neq(-2) : that.data.collegeCur + ''; // 确保格式正确
+        
             db.collection('publish').where({
-                  status: 0,
-                  dura: _.gt(new Date().getTime()),
-                  collegeid: collegeid
-            }).orderBy('creat', 'desc').skip(page * 20).limit(20).get({
-                  success: function(res) {
-                        if (res.data.length == 0) {
-                              that.setData({
-                                    nomore: true
-                              })
-                              return false;
-                        }
-                        if (res.data.length < 20) {
-                              that.setData({
-                                    nomore: true
-                              })
-                        }
-                        that.setData({
-                              page: page,
-                              list: that.data.list.concat(res.data)
-                        })
+                dura: _.gt(new Date().getTime()),
+                collegeid: collegeid
+            }).orderBy('createTime', 'desc')
+              .skip(page * 20)
+              .limit(20)
+              .get({
+                  success(res) {
+                      console.log('Success callback triggered in more');
+                      console.log('Received data:', res.data); // 打印整个数据集
+                      if (res.data && Array.isArray(res.data)) {
+                          res.data.forEach(item => {
+                              console.log("Record createTime in more:", item.createTime);
+                          });
+                      } else {
+                          console.error('Unexpected data format in more:', res.data);
+                      }
+        
+                      if (res.data.length == 0) {
+                          that.setData({
+                              nomore: true
+                          })
+                          return false;
+                      }
+                      if (res.data.length < 20) {
+                          that.setData({
+                              nomore: true
+                          })
+                      }
+                      that.setData({
+                          page: page,
+                          list: that.data.list.concat(res.data)
+                      })
                   },
                   fail() {
-                        wx.showToast({
-                              title: '获取失败',
-                              icon: 'none'
-                        })
+                      wx.showToast({
+                          title: '获取失败',
+                          icon: 'none'
+                      })
                   }
-            })
-      },
+              })
+        },
       onReachBottom() {
             this.more();
       },
