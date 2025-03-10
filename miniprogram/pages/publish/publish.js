@@ -81,7 +81,7 @@ chooseCategory(e) {
       
       confirm() {
         console.log("开始执行 confirm 方法");
-        console.log("当前的 openid: ", app.openid);
+        //console.log("当前的 openid: ", app.openid);
             let that = this;
            
             if (!that.data.isProductOrDemand || !that.data.selectedCategory) {
@@ -106,7 +106,7 @@ chooseCategory(e) {
                   })
                   return false
             }
-            console.log("所有条件已满足，准备继续执行");
+            //console.log("所有条件已满足，准备继续执行");
             
               // 直接进入下一步骤，模拟已登录状态
   that.setData({

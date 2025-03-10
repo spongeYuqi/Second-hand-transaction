@@ -127,7 +127,7 @@ Page({
                                     parse: 0,
                               },
                               success: function(res) {
-                                    console.log(res)
+                                    //console.log(res)
                                     db.collection('user').doc(res._id).get({
                                           success: function(res) {
                                                 app.userinfo = res.data;

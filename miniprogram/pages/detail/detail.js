@@ -24,30 +24,38 @@ Page({
       },
       //获取发布信息
       getPublish(e) {
-            let that = this;
-            db.collection('publish').doc(e).get({
-                  success: function(res) {
-                        const createDate = new Date(res.data.createTime);
-                        const formattedDate = `${createDate.getFullYear()}-${createDate.getMonth() + 1}-${createDate.getDate()} ${createDate.getHours()}:${createDate.getMinutes()}`;
-                        that.setData({
-                              collegeName: JSON.parse(config.data).college[parseInt(res.data.collegeid) + 1],
-                              publishinfo: res.data,
-                              publishType: res.data.type == 'demand' ? '需求':'商品' ,
-                              category: res.data.category,
-                              details: res.data.details,
-                              contactInfo: res.data.contactInfo,
-                              images: res.data.images,
-                              price: res.data.price,
-                              createtime: formattedDate,
-                              username: res.data.nickname,
-                              genderId: res.data.gender,
-                           
-                        })
-                        // that.getSeller(res.data._openid, res.data.bookinfo._id)
-                        that.getSeller(res.data._openid)
-                  }
-            })
-      },
+  let that = this;
+  db.collection('publish').doc(e).get({
+    success: function(res) {
+      const createDate = new Date(res.data.createTime);
+      const formattedDate = `${createDate.getFullYear()}-${(createDate.getMonth() + 1).toString().padStart(2, '0')}-${createDate.getDate().toString().padStart(2, '0')} ${createDate.getHours().toString().padStart(2, '0')}:${createDate.getMinutes().toString().padStart(2, '0')}`;
+      // 获取发布者信息
+      db.collection('user').where({
+        _openid: res.data._openid // 使用发布者的 openid 来查找用户信息
+      }).get({
+        success: function(userRes) {
+          if (userRes.data.length > 0) {
+            const userInfo = userRes.data[0];
+            that.setData({
+              collegeName: JSON.parse(config.data).college[parseInt(res.data.collegeid) + 1],
+              publishinfo: res.data,
+              publishType: res.data.type == 'demand' ? '需求':'商品',
+              category: res.data.category,
+              details: res.data.details,
+              contactInfo: res.data.contactInfo,
+              images: res.data.images,
+              price: res.data.price,
+              createtime: formattedDate,
+              username: res.data.nickname,
+              genderId: res.data.gender,
+              avatarUrl: userInfo.info.avatarUrl // 添加发布者的头像URL
+            });
+          }
+        }
+      });
+    }
+  })
+},
       
     
       //回到首页
