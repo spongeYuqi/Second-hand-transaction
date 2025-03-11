@@ -19,7 +19,7 @@
 </view>
 <!-- 发布信息 -->
 <view class="user_box">
-      <image lazy-load src="{{avatarUrl}}" class="avatar"></image>
+      <image lazy-load mode="aspectFill" src="{{avatarUrl}}" class="avatar"></image>
       <view class="details">
             <view class="sex">
                   <image lazy-load src="{{genderId==0?'/images/girl.png':'/images/boy.png'}}"></image>

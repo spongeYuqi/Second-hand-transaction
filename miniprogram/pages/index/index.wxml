@@ -47,11 +47,16 @@
       <view class="card_grid" wx:if="{{list.length>0}}">
             <block wx:for="{{list}}" wx:key="_id">
                   <view class="card_one" bindtap="detail" data-id="{{item._id}}">
-                        <image lazy-load class="card_poster" src="{{item.images && item.images.length > 0 ? item.images[0] : '/images/sharehaoy.png'}}" />
-                        <view class="card_title text-cut">{{item.bookinfo.title}}</view>
-                        <view class="card_author text-cut">{{item.bookinfo.author}}</view>
+                        <image lazy-load class="card_poster" mode="aspectFill" src="{{item.images && item.images.length > 0 ? item.images[0] : '/images/moren.png'}}" />
                         <view class="card_between">
-                              <view class="card_price">￥{{item.price}}.00元</view>
+                              <view class="card_title text-cut">{{item.type}}</view>
+                              <view class="card_author text-cut">{{item.category}}</view>
+                        </view>
+                        <view class="card_between">
+                              <view class="list_price">
+                                    <text class="price-symbol">￥</text>
+                                    {{item.price}}
+                              </view>
                               <image lazy-load class="card_buy" src="/images/buy.png"></image>
                         </view>
                   </view>
@@ -63,7 +68,7 @@
       <block wx:if="{{list.length>0}}">
             <block wx:for="{{list}}" wx:key="_id">
                   <view class="list_box" bindtap="detail" data-id="{{item._id}}">
-                        <image lazy-load class="list_poster" mode="aspectFill" src="{{item.images && item.images.length > 0 ? item.images[0] : '/images/sharehaoy.png'}}" />
+                        <image lazy-load class="list_poster" mode="aspectFill" src="{{item.images && item.images.length > 0 ? item.images[0] : '/images/moren.png'}}" />
                         <view class="list_content">
                               <view class="list_title">{{item.details}}</view>
                               <view class="list_word">
@@ -80,7 +85,8 @@
                               </view>
                               <view class="user_info_container">
                                     <view class="user_info">
-                                          <image class="avatar" lazy-load src="{{item.gender==0?'/images/girl.png':'/images/boy.png'}}"></image>
+                                          <!-- <image class="avatar" lazy-load src="{{item.gender==0?'/images/girl.png':'/images/boy.png'}}"></image> -->
+                                          <image class="avatar" mode="aspectFill" lazy-load src="{{item.touxiang || '/images/avator.png'}}" />
                                           <view class="nickname">{{item.nickname}}</view>
                                     </view>
                                     <view class="tab">详情</view>

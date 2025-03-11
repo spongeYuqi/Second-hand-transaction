@@ -172,6 +172,14 @@
       flex-wrap: wrap;
 }
 
+.card_poster {
+      width: 300rpx;
+      height: 300rpx;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      border-radius: 15rpx;
+}
 .card_one {
       margin-top: 20rpx;
       width: 50%;
@@ -182,46 +190,41 @@
       align-items: center;
 }
 
-.card_poster {
-      width: 260rpx;
-      height: 260rpx;
-}
-
-.card_title {
-      width: 100%;
-      font-size: 30rpx;
-      letter-spacing: 3rpx;
-      margin-top: 20rpx;
-      line-height: 45rpx;
-}
-
-.card_author {
-      width: 100%;
-      font-size: 26rpx;
-      letter-spacing: 3rpx;
-      line-height: 40rpx;
-      color: rgb(129, 129, 129);
-}
-
+/* 保证.card_between可以正确地对其内部元素进行布局 */
 .card_between {
       margin-top: 5rpx;
       width: 100%;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-}
-
-.card_price {
-      font-size: 33rpx;
-      color: rgb(255, 0, 0);
-}
-
-.card_buy {
+      justify-content: flex-start; /* 确保所有子元素从左侧开始排列 */
+      align-items: center; /* 垂直居中对齐子元素 */
+  }
+  
+  /* 对于包含价格和购买图标的.card_between，我们希望购买图标位于最右侧 */
+  .card_between:last-child { /* 假设这是最后一个.card_between，包含价格和购买图标 */
+      justify-content: space-between; /* 或者使用space-between让购买图标尽可能靠右 */
+  }
+  
+  .list_price, .card_buy {
+      display: flex;
+      align-items: center; /* 如果有垂直对齐的需求 */
+  }
+  
+  /* 确保.card_buy尽可能靠右 */
+  .card_buy {
+      margin-left: auto; /* 这会把.card_buy推到最右边 */
       padding-right: 10rpx;
       width: 40rpx;
       height: 40rpx;
-}
+  }
 
+  /* 确保.card_title和.card_author有合适的样式 */
+  .card_title, .card_author {
+      font-size: 26rpx;
+      color: #919191;
+      /* 添加或确认以下两行 */
+      margin: 0 10rpx; /* 给.card_author留出一些空间 */
+      white-space: nowrap; /* 防止文本换行 */
+  }
 .list_box {
       width: 100%;
       height: 290rpx;
@@ -347,12 +350,15 @@
 }
 
 .avatar {
-      width: 30rpx;
-      height: 30rpx;
+      width: 50rpx;
+      height: 50rpx;
       border-radius: 50%;
       margin-right: 16rpx; /* 给头像右边一些空间 */
       border: 0.5px solid #fbbd08;
-      object-fit: cover; /* 确保图像覆盖整个圆形区域 */
+      object-fit: cover;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+     
   }
 
 .nocontent {

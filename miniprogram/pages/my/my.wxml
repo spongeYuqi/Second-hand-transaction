@@ -11,7 +11,7 @@
       </view>
       <view class="top_2">
             <view class="avator" bindtap="chooseImage">
-                  <image wx:if="{{userinfo && userinfo.info && userinfo.info.avatarUrl}}" src="{{userinfo.info.avatarUrl}}"></image>
+                  <image lazy-load class="list_poster" mode="aspectFill" wx:if="{{userinfo && userinfo.info && userinfo.info.avatarUrl}}" src="{{userinfo.info.avatarUrl}}"></image>
                   <image wx:if="{{!userinfo}}" src="/images/avator.png"></image>
             </view>
       </view>

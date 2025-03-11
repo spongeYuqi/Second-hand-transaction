@@ -291,6 +291,7 @@ publish() {
       if (res.data.length > 0) { // 确保找到了用户数据
         const nickname = res.data[0].Nickname; // 假设字段名为Nickname，请根据实际情况修改
         const xinbie = res.data[0].gender.id;
+        const avatar = res.data[0].info.avatarUrl;
         // 继续进行发布的逻辑
         if (!that.data.details || that.data.details.length > 210 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
           wx.showToast({
@@ -317,6 +318,7 @@ publish() {
                   nickname: nickname, // 添加用户昵称
                   openid: app.openid, // 确保openid也被上传
                   gender: xinbie,
+                  touxiang: avatar,
                   //campus: that.data.campus,
                   dura: new Date().getTime() + that.data.dura * (24 * 60 * 60 * 1000),
                 },

@@ -30,7 +30,7 @@ Page({
       const createDate = new Date(res.data.createTime);
       const formattedDate = `${createDate.getFullYear()}-${(createDate.getMonth() + 1).toString().padStart(2, '0')}-${createDate.getDate().toString().padStart(2, '0')} ${createDate.getHours().toString().padStart(2, '0')}:${createDate.getMinutes().toString().padStart(2, '0')}`;
       // 设置默认图片，假设默认图片位于项目的根目录下名为'sharehaoy.png'
-      const images = res.data.images && res.data.images.length > 0 ? res.data.images : ['/images/sharehaoy.png'];
+      const images = res.data.images && res.data.images.length > 0 ? res.data.images : ['/images/moren.png'];
       
       // 获取发布者信息
       db.collection('user').where({
