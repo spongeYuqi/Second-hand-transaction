@@ -9,14 +9,20 @@ Page({
   data: {
     showShare: false,
     poster: JSON.parse(config.data).share_poster,
-    userinfo: null, // 初始化用户信息为null
+    
   },
 
   onLoad() {
+      
+      console.log('App OpenID in onLoad:', app.openid); // 添加的日志输出
     this.fetchLatestUserInfo(); // 页面加载时获取最新用户信息
   },
 
   onShow() {
+      this.setData({
+            userinfo: app.userinfo
+      })
+      console.log('App OpenID in onLoad:', app.openid); // 添加的日志输出
     this.fetchLatestUserInfo(); // 页面显示时也重新获取最新用户信息
   },
 

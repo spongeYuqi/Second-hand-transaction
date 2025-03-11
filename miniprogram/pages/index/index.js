@@ -109,9 +109,13 @@ Page({
               .limit(20)
               .get({
                   success(res) {
-
-        
                       wx.stopPullDownRefresh(); // 暂停刷新动作
+                      // 对返回的数据进行处理，限制details的长度
+              const processedData = res.data.map(item => ({
+                  ...item,
+                  details: item.details.length > 24 ? item.details.substring(0, 24) : item.details
+              }));
+
                       if (res.data.length == 0) {
                           that.setData({
                               nomore: true,
@@ -124,12 +128,14 @@ Page({
                               nomore: true,
                               page: 0,
                               list: res.data,
+                              list: processedData, // 使用处理后的数据
                           });
                       } else {
                           that.setData({
                               page: 0,
                               list: res.data,
                               nomore: false,
+                              list: processedData, // 使用处理后的数据
                           });
                       }
                   },
@@ -154,6 +160,11 @@ Page({
               .limit(20)
               .get({
                   success(res) {
+                        // 对返回的数据进行处理，限制details的长度
+              const processedData = res.data.map(item => ({
+                  ...item,
+                  details: item.details.length > 24 ? item.details.substring(0, 24) : item.details
+              }));
                       console.log('Success callback triggered in more');
                       console.log('Received data:', res.data); // 打印整个数据集
                       if (res.data && Array.isArray(res.data)) {
@@ -177,7 +188,8 @@ Page({
                       }
                       that.setData({
                           page: page,
-                          list: that.data.list.concat(res.data)
+                          list: that.data.list.concat(res.data),
+                          list: that.data.list.concat(processedData) // 合并原列表和新获取的处理后的数据
                       })
                   },
                   fail() {

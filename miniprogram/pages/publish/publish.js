@@ -137,25 +137,36 @@ bindContactInput(e) {
   });
 },
 //图片
-      chooseImage: function() {
-        const that = this;
-        const count = this.data.maxImages - this.data.images.length; // 计算还可以选择多少张图片
-    
-        wx.chooseImage({
-          count: count,
-          sizeType: ['original', 'compressed'],
-          sourceType: ['album', 'camera'],
-          success(res) {
-            const tempFilePaths = res.tempFilePaths;
-            that.setData({
-              images: that.data.images.concat(tempFilePaths),
-            });
-          },
-          fail() {
-            // 如果用户取消选择图片，这里可以不做处理
-          }
+chooseImage: function() {
+  const that = this;
+  const count = this.data.maxImages - this.data.images.length; // 计算还可以选择多少张图片
+
+  wx.chooseImage({
+    count: count,
+    sizeType: ['original', 'compressed'],
+    sourceType: ['album', 'camera'],
+    success(res) {
+      const tempFilePaths = res.tempFilePaths;
+      // 上传每一张选中的图片
+      Promise.all(tempFilePaths.map(tempFilePath => 
+        wx.cloud.uploadFile({
+          cloudPath: `your-folder-name/${Date.now()}-${Math.floor(Math.random(0, 1)*1000)}.png`, // 根据需要设置文件路径和名称
+          filePath: tempFilePath,
+        })
+      )).then(results => {
+        const fileIds = results.map(result => result.fileID);
+        that.setData({
+          images: that.data.images.concat(fileIds), // 将fileID存入images数组
         });
-      },
+      }).catch(error => {
+        console.error('图片上传失败:', error);
+      });
+    },
+    fail() {
+      // 如果用户取消选择图片，这里可以不做处理
+    }
+  });
+},
     
       deleteImage: function(e) {
         const index = e.currentTarget.dataset.index;
@@ -175,14 +186,6 @@ bindContactInput(e) {
         });
       },
 
-  previewImage: function(e) {
-    const index = e.currentTarget.dataset.index;
-    const current = this.data.images[index];
-    wx.previewImage({
-      current: current,
-      urls: this.data.images
-    });
-  },
   
 // 显示数字输入框
 // 显示数字输入框
@@ -289,7 +292,7 @@ publish() {
         const nickname = res.data[0].Nickname; // 假设字段名为Nickname，请根据实际情况修改
         const xinbie = res.data[0].gender.id;
         // 继续进行发布的逻辑
-        if (!that.data.details || that.data.details.length > 200 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
+        if (!that.data.details || that.data.details.length > 210 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
           wx.showToast({
             title: '请检查详情、价格或联系方式',
             icon: 'none'
@@ -303,7 +306,7 @@ publish() {
             if (res.confirm) {
               db.collection('publish').add({
                 data: {
-                  type: that.data.isProductOrDemand,
+                  type: that.data.isProductOrDemand == 'demand' ? '需求':'商品',
                   category: that.data.selectedCategory,
                   collegeid: that.data.cids,
                   details: that.data.details,

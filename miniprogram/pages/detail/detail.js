@@ -42,7 +42,7 @@ Page({
             that.setData({
               //collegeName: JSON.parse(config.data).college[parseInt(res.data.collegeid) + 1],
               publishinfo: res.data,
-              publishType: res.data.type == 'demand' ? '需求':'商品',
+              publishType: res.data.type,
               category: res.data.category,
               details: res.data.details,
               contactInfo: res.data.contactInfo,
