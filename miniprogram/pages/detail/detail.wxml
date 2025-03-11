@@ -39,20 +39,18 @@
 <view style="height: 96rpx;"></view>
 <!-- 底部导航 -->
 <view class="tabbar">
-      <view class="t_card">
+      <view class="t_card" bindtap="home">
             <image src="/images/home.png"></image>
             <text>首页</text>
-            <button class="t_button" bindtap="home"></button>
       </view>
-      >
       <view class="t_card">
             <image src="/images/share.png"></image>
             <text>分享</text>
             <button class="t_button" open-type="share"></button>
       </view>
-      <view class="buy_box">
-            <view class="buy shadow" bindtap="buy" style="width: 260rpx; display: flex; box-sizing: border-box">
-                  {{publishinfo.status==0?'立即购买':'刚刚被抢光了'}}
+      <view class="t_card collect_box" bindtap="collect">
+            <view class="collect shadow" style="width: 100%; display: flex; justify-content: center; align-items: center;">
+                  收藏
             </view>
       </view>
 </view>

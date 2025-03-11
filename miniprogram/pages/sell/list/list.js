@@ -108,20 +108,12 @@ Page({
                   }
             })
       },
-      //查看详情
+      //跳转详情
       detail(e) {
             let that = this;
-            let detail = e.currentTarget.dataset.detail;
-            if (detail.status == 0) {
-                  wx.navigateTo({
-                        url: '/pages/detail/detail?scene=' + detail._id,
-                  })
-            }
-            if (detail.status == 1) {
-                  wx.navigateTo({
-                        url: '/pages/sell/detail/detail?id=' + detail._id,
-                  })
-            }
+            wx.navigateTo({
+                  url: '/pages/detail/detail?scene=' + e.currentTarget.dataset.id,
+            })
       },
       //下拉刷新
       onPullDownRefresh() {
@@ -151,7 +143,7 @@ Page({
             let page = that.data.page + 1;
             db.collection('publish').where({
                   _openid: app.openid
-            }).orderBy('creat', 'desc').skip(page * 20).limit(20).get({
+            }).orderBy('creatTime', 'desc').skip(page * 20).limit(20).get({
                   success: function(res) {
                         if (res.data.length == 0) {
                               that.setData({

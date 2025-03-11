@@ -7,20 +7,20 @@
             "pages/my/my",
             "pages/detail/detail",
             
-            "pages/order/detail/detail",
+          
             "pages/order/list/list",
             "pages/help/help",
             "pages/kefu/kefu",
-            "pages/parse/parse",
+            
             
             "pages/about/about",
             "pages/sell/list/list",
-            "pages/sell/detail/detail",
+            
             
             "pages/search/search",
             "pages/edit/edit",
-            "pages/web/web",
-            "pages/poster/poster"
+            "pages/web/web"
+           
       ],
       "window": {
             "backgroundColor": "#fbbd08",

@@ -165,15 +165,15 @@ Page({
                   ...item,
                   details: item.details.length > 24 ? item.details.substring(0, 24) : item.details
               }));
-                      console.log('Success callback triggered in more');
-                      console.log('Received data:', res.data); // 打印整个数据集
-                      if (res.data && Array.isArray(res.data)) {
-                          res.data.forEach(item => {
-                              console.log("Record createTime in more:", item.createTime);
-                          });
-                      } else {
-                          console.error('Unexpected data format in more:', res.data);
-                      }
+                  //     console.log('Success callback triggered in more');
+                  //     console.log('Received data:', res.data); // 打印整个数据集
+                  //     if (res.data && Array.isArray(res.data)) {
+                  //         res.data.forEach(item => {
+                  //             console.log("Record createTime in more:", item.createTime);
+                  //         });
+                  //     } else {
+                  //         console.error('Unexpected data format in more:', res.data);
+                  //     }
         
                       if (res.data.length == 0) {
                           that.setData({

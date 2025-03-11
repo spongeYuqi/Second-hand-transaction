@@ -77,13 +77,22 @@ previewImage(e) {
                   url: '/pages/index/index',
             })
       },
-     
+
+      collect() {
+            wx.showToast({
+              title: '禁止收藏夹吃灰',
+              icon: 'none', // 默认是success, 可以设置为'none'来不显示图标
+              duration: 2000 // 显示时间，单位为毫秒，默认为1500
+            });
+          },
+        
       //路由
       go(e) {
             wx.navigateTo({
                   url: e.currentTarget.dataset.go,
             })
       },
+      
     
       onShareAppMessage() {
             return {
