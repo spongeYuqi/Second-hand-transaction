@@ -3,6 +3,12 @@ const db = wx.cloud.database();
 const config = require("../../config.js");
 const _ = db.command;
 Page({
+  // 跳转到发布者页面
+  goToAuthorPage() {
+    wx.navigateTo({
+      url: '/pages/sell/list/list?openid=' + this.data.publishinfo._openid
+    });
+  },
 
       /**
        * 页面的初始数据
@@ -51,7 +57,8 @@ Page({
               createtime: formattedDate,
               username: res.data.nickname,
               genderId: res.data.gender,
-              avatarUrl: userInfo.info.avatarUrl // 添加发布者的头像URL
+              avatarUrl: userInfo.info.avatarUrl, // 添加发布者的头像URL
+              isAuthor: app.openid === res.data._openid // 判断当前用户是否为发布者
             });
           }
         }
@@ -82,7 +89,7 @@ previewImage(e) {
             wx.showToast({
               title: '禁止收藏夹吃灰',
               icon: 'none', // 默认是success, 可以设置为'none'来不显示图标
-              duration: 2000 // 显示时间，单位为毫秒，默认为1500
+              duration: 1000 // 显示时间，单位为毫秒，默认为1500
             });
           },
         

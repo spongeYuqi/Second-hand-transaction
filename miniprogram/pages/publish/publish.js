@@ -295,7 +295,7 @@ publish() {
         // 继续进行发布的逻辑
         if (!that.data.details || that.data.details.length > 210 || !that.data.price || !that.data.contactInfo || that.data.contactInfo.length > 20) {
           wx.showToast({
-            title: '请检查详情、价格或联系方式',
+            title: '请检查详情、价格联系方式',
             icon: 'none'
           });
           return false;

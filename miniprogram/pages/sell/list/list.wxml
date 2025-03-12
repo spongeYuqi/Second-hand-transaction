@@ -21,7 +21,8 @@
                         </view>
                         <image class="b2" lazy-load mode="aspectFill" src="{{item.images && item.images.length > 0 ? item.images[0] : '/images/moren.png'}}" />
                   </view>
-                  <view class="c">
+                  <!-- 根据isOwner属性决定是否显示删除按钮 -->
+                  <view class="c" wx:if="{{item.isOwner}}">
                         <view class="c1 bg-grey" catchtap="del" data-del="{{item}}">删除</view>
                   </view>
             </view>
