@@ -231,13 +231,13 @@ Page({
             })
       },
       //跳转轮播链接
-      goweb(e) {
-            if (e.currentTarget.dataset.web){
-                  wx.navigateTo({
-                        url: '/pages/web/web?url='+e.currentTarget.dataset.web.url,
-                  })
-            }
-      },
+      // goweb(e) {
+      //       if (e.currentTarget.dataset.web){
+      //             wx.navigateTo({
+      //                   url: '/pages/web/web?url='+e.currentTarget.dataset.web.url,
+      //             })
+      //       }
+      // },
       onShareAppMessage() {
             return {
                   title: JSON.parse(config.data).share_title,
