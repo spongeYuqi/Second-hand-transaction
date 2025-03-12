@@ -9,7 +9,7 @@ Page({
   data: {
     showShare: false,
     poster: JSON.parse(config.data).share_poster,
-    
+    //userinfo: app.userinfo, // 初始化用户信息为null
   },
 
   onLoad() {
