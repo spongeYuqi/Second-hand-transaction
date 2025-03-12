@@ -84,27 +84,36 @@
 
 .list_box {
       width: 100%;
+      height: 290rpx;
+      border-bottom: 1rpx solid #eee;
+      padding: 5rpx;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      padding: 20rpx 0;
       box-sizing: border-box;
-      margin-top: 10rpx;
-}
-
-.list_poster {
-      width: 200rpx;
-      height: 200rpx;
 }
 
 .list_content {
-      height: 200rpx;
+      height: 250rpx;
       width: calc(100% - 230rpx);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 0 10rpx;
+      padding: 0 5rpx;
       box-sizing: border-box;
 }
+.list_poster {
+      width: 250rpx;
+      height: 250rpx;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      border-radius: 15rpx;
+      margin-left: 8rpx;
+      margin-right: 20rpx;
+}
+
+
 
 .list_word {
       display: flex;
@@ -113,43 +122,100 @@
       box-sizing: border-box;
 }
 
-.list_title {
+.list_info {
+      display: flex;
+      flex-direction: row;
+      gap: 20rpx;
+      padding-top: 0rpx;
       width: 100%;
+      overflow: hidden; /* 确保过长内容不会导致溢出 */
+  }
+  
+  .type-text, .category-text {
+      font-size: 26rpx;
+      color: #919191;
+      flex-shrink: 0; /* 防止文本因为空间不足而缩小 */
+      white-space: nowrap; /* 强制文本不换行 */
+  }
+  
+.list_title {
+      height:40rpx;
+      width: 400rpx;
       font-size: 32rpx;
       letter-spacing: 3rpx;
-      line-height: 45rpx;
-}
-
-.list_author {
-      padding-top: 10rpx;
-      width: 100%;
-      font-size: 27rpx;
-      letter-spacing: 3rpx;
-      line-height: 40rpx;
-      color: rgb(129, 129, 129);
+      line-height: 44rpx;
+      margin-top: 2rpx;
+      margin-bottom: 50rpx;
 }
 
 .list_between {
+      margin: 0;
       width: 100%;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-bottom: 1rpx solid #eee;
-      padding-bottom: 10rpx;
+      flex-direction: column;
 }
 
 .list_price {
       font-size: 36rpx;
       color: rgb(255, 0, 0);
+      display: flex;
+      align-items: baseline;
+}
+.user_info_container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0;
 }
 
-.list_time {
+.user_info {
+      display: flex;
+      align-items: center;
+      gap: 1px;
+}
+
+
+.nickname {
+      font-size: 28rpx;
+      color: #919191;
+}
+      
+
+
+
+.price-symbol {
+      font-size: 28rpx;
+      margin-right: 4rpx;
+}
+
+.tab {
       font-size: 28rpx;
       letter-spacing: 2rpx;
-      color: rgb(129, 129, 129);
+      color: #919191;
+      min-width: 150rpx;
+      text-align: right;
 }
 
+.avatar {
+      width: 50rpx;
+      height: 50rpx;
+      border-radius: 50%;
+      margin-right: 16rpx; /* 给头像右边一些空间 */
+      border: 0.5px solid #fbbd08;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+     
+  }
 
+  /* 设置清除历史按钮的文字大小和颜色 */
+.clear-history {
+      font-size: 28rpx; /* 根据需要调整大小 */
+      color: #888888; /* 灰色 */
+      margin-top: 20rpx; /* 可选：根据布局需要添加外边距 */
+      padding: 10rpx; /* 可选：增加内边距使点击区域更大 */
+  }
 .nocontent {
       width: 100%;
       height: 400rpx;

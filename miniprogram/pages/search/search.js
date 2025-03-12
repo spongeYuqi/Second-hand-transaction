@@ -17,7 +17,7 @@ Page({
             nomore:false,
       },
       onLoad: function(options) {
-            // this.gethis();
+            this.gethis();
             this.getnew();
       },
       //获取本地记录
@@ -39,9 +39,37 @@ Page({
       },
       //选择历史搜索关键词
       choosekey(e) {
-            this.data.key = e.currentTarget.dataset.key;
-            this.search('his');
-      },
+            const key = e.currentTarget.dataset.key;
+            this.setData({ key: key }, () => {
+                this.search('his');
+            });
+        },
+
+          // 清除历史记录
+    clearHistory() {
+      const that = this;
+      wx.showModal({
+          title: '提示',
+          content: '确认删除所有历史吗？',
+          success(res) {
+              if (res.confirm) {
+                  // 用户点击了确定，执行清除操作
+                  wx.removeStorage({
+                      key: 'history',
+                      success: function () {
+                          // 成功清除后更新页面数据
+                          that.setData({
+                              hislist: []
+                          });
+                      }
+                  });
+              } else if (res.cancel) {
+                  console.log('用户点击取消')
+              }
+          }
+      });
+  },
+      
       
       //跳转详情
       detail(e) {
@@ -50,6 +78,7 @@ Page({
                   url: '/pages/detail/detail?scene=' + e.currentTarget.dataset.id,
             })
       },
+      
       //搜索结果
       search(n) {
             let that = this;
@@ -71,19 +100,21 @@ Page({
                   that.history(key);
             }
             db.collection('publish').where({
-                  status: 0,
+                 
                   dura: _.gt(new Date().getTime()),
-                  key: db.RegExp({
+                  details: db.RegExp({
                         regexp: '.*' + key + '.*',
                         options: 'i',
                   })
-            }).orderBy('creat', 'desc').limit(20).get({
+            }).orderBy('creatTime', 'desc').limit(20).get({
                   success(e) {
+                        
                         wx.hideLoading();
                         that.setData({
                               blank: true,
                               page: 0,
                               list: e.data,
+                             
                               nomore: false,
                         })
                   }
@@ -145,13 +176,13 @@ Page({
                   var collegeid = that.data.collegeCur + '' //小程序搜索必须对应格式
             }
             db.collection('publish').where({
-                  status: 0,
+                  
                   dura: _.gt(new Date().getTime()),
-                  key: db.RegExp({
+                  details: db.RegExp({
                         regexp: '.*' + that.data.key + '.*',
                         options: 'i',
                   })
-            }).orderBy('creat', 'desc').skip(page * 20).limit(20).get({
+            }).orderBy('creatTime', 'desc').skip(page * 20).limit(20).get({
                   success: function (res) {
                         if (res.data.length == 0) {
                               that.setData({

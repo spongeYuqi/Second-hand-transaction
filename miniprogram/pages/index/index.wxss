@@ -291,14 +291,6 @@
       margin-bottom: 50rpx;
 }
 
-.list_author {
-      padding-top: 10rpx;
-      width: 100%;
-      font-size: 27rpx;
-      letter-spacing: 3rpx;
-      line-height: 40rpx;
-      color: rgb(129, 129, 129);
-}
 
 .list_between {
       margin: 0;

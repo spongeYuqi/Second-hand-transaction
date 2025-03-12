@@ -48,6 +48,14 @@ function commentTimeHandle(dateStr) {
             return M + '月' + D + '日';
       }
 }
+// common.wxs
+
+var substring = function(str, length) {
+      return str.length > length ? str.substring(0, length) : str;
+  }
+  
+
+
 function format(dateStr) {
       var publishTime = dateStr,
             date = getDate(publishTime), //获取dateStr的标准格式 console.log(date) 打印结果  Thu Sep 06 2018 18:47:00 GMT+0800 (中国标准时间)
@@ -79,5 +87,6 @@ function format(dateStr) {
 }
 module.exports = {
       timelog: commentTimeHandle,
-      format:format
+      format:format,
+      substring: substring,
 }
