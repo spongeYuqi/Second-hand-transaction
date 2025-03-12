@@ -14,7 +14,7 @@ Page({
 
   onLoad() {
       
-      console.log('App OpenID in onLoad:', app.openid); // 添加的日志输出
+      //console.log('App OpenID in onLoad:', app.openid); // 添加的日志输出
     this.fetchLatestUserInfo(); // 页面加载时获取最新用户信息
   },
 
@@ -22,41 +22,39 @@ Page({
       this.setData({
             userinfo: app.userinfo
       })
-      console.log('App OpenID in onLoad:', app.openid); // 添加的日志输出
+      //console.log('App OpenID in onLoad:', app.openid); // 添加的日志输出
     this.fetchLatestUserInfo(); // 页面显示时也重新获取最新用户信息
   },
 
   go(e) {
-    const target = e.currentTarget.dataset.go;
-    // 检查是否为"我的收藏"或"我的积分"
-    if (target === '/pages/order/list/list' || target === '/pages/parse/parse') {
-      wx.showToast({
-        title: '待开发中',
-        icon: 'none',
-        duration: 1000
-      });
-      return; // 结束函数执行，避免继续运行下面的代码
-    }
-    if (e.currentTarget.dataset.status == '1') {
-      if (!app.openid) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '该功能需要注册方可使用，是否马上去注册',
-          success(res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '/pages/login/login',
-              })
+            if (e.currentTarget.dataset.status == '1') {
+                  if (!app.openid) {
+                        wx.showModal({
+                              title: '温馨提示',
+                              content: '该功能需要注册方可使用，是否马上去注册',
+                              success(res) {
+                                    if (res.confirm) {
+                                          wx.navigateTo({
+                                                url: '/pages/login/login',
+                                          })
+                                    }
+                              }
+                        })
+                        return false
+                  }
             }
-          }
-        })
-        return false
-      }
-    }
-    wx.navigateTo({
-      url: e.currentTarget.dataset.go
-    })
-  },
+            wx.navigateTo({
+                  url: e.currentTarget.dataset.go
+            })
+      },
+
+      develop() {
+            wx.showToast({
+              title: '待开发',
+              icon: 'none', // 默认是success, 可以设置为'none'来不显示图标
+              duration: 1000 // 显示时间，单位为毫秒，默认为1500
+            });
+          },
 
   chooseImage() {
       // 检查用户是否已登录

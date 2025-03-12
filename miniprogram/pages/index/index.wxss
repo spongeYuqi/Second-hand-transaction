@@ -286,9 +286,9 @@
       width: 400rpx;
       font-size: 32rpx;
       letter-spacing: 3rpx;
-      line-height: 40rpx;
+      line-height: 44rpx;
       margin-top: 2rpx;
-      margin-bottom: 70rpx;
+      margin-bottom: 50rpx;
 }
 
 .list_author {

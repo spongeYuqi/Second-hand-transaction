@@ -58,20 +58,27 @@
       border-bottom: 1rpx solid #eee;
 }
 
-.b image {
-      width: 130rpx;
-      height: 130rpx;
-}
-
 .b1 {
-      width: calc(100% - 130rpx);
+      width: 30%;
       padding: 0 20rpx;
       height: 130rpx;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
       justify-content: space-between;
+      flex-shrink: 0;
 }
+
+.b2 {
+      width: 400rpx;
+      margin-left: 60rpx;
+}
+
+.b image {
+      width: 130rpx;
+      height: 130rpx;
+}
+
 
 .b11 {
       display: flex;
@@ -79,12 +86,8 @@
       width: 100%;
 }
 
-.b111 {
-      font-size: 30rpx;
-      letter-spacing: 2rpx;
-}
 
-.b112 {
+.b111,.b112 {
       padding-top: 10rpx;
       font-size: 26rpx;
       letter-spacing: 3rpx;
@@ -96,6 +99,9 @@
       justify-content: flex-end;
       font-size: 32rpx;
       color: #f80202;
+      display: block;
+      width: 100%;
+      text-align: left;
 }
 
 .c {

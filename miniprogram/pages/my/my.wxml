@@ -21,7 +21,7 @@
             <image src="/images/history.png"></image>
             <view>我的发布</view>
       </view>
-      <view class="center_1" bindtap="go" data-go="/pages/order/list/list" data-status="1">
+      <view class="center_1" bindtap="develop">
             <image src="/images/publish.png"></image>
             <view>我的收藏</view>
       </view>
@@ -32,7 +32,7 @@
 </view>
 <view class="blank"></view>
 <view class="bottom_box">
-      <view class="bottom_card" bindtap="go" data-go="/pages/parse/parse" data-status="1">
+      <view class="bottom_card" bindtap="develop">
             <view class="bottom_1">
                   <image src="/images/parse.png"></image>
                   <view>我的积分</view>

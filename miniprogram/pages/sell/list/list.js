@@ -22,21 +22,28 @@ Page({
                   title: '加载中',
             })
             this.getList();
+            this.windowInfo = wx.getWindowInfo();
       },
       getList() {
             let that = this;
             db.collection('publish').where({
                   _openid: app.openid
-            }).orderBy('creat', 'desc').limit(20).get({
+            }).orderBy('createTime', 'desc').limit(20).get({
                   success: function(res) {
+                        const list = res.data.map(item => {
+                              const createDate = new Date(item.createTime);
+                              item.creatTimeFormatted = `${createDate.getFullYear()}-${(createDate.getMonth() + 1).toString().padStart(2, '0')}-${createDate.getDate().toString().padStart(2, '0')} ${createDate.getHours().toString().padStart(2, '0')}:${createDate.getMinutes().toString().padStart(2, '0')}`;
+                              return item;
+                          });
                         wx.hideLoading();
                         wx.stopPullDownRefresh(); //暂停刷新动作
                         that.setData({
-                              list: res.data,
+                              list: list,
                               nomore: false,
                               page: 0,
+                             
                         })
-                        console.log(res.data)
+                        // console.log(res.data)
                   }
             })
       },
@@ -46,7 +53,7 @@ Page({
             let del = e.currentTarget.dataset.del;
             wx.showModal({
                   title: '温馨提示',
-                  content: '您确定要删除此条订单吗？',
+                  content: '您确定要删除此条发布吗？',
                   success(res) {
                         if (res.confirm) {
                               wx.showLoading({
@@ -72,42 +79,7 @@ Page({
                   }
             })
       },
-      //擦亮
-      crash(e) {
-            let that = this;
-            let crash = e.currentTarget.dataset.crash;
-            wx.showModal({
-                  title: '温馨提示',
-                  content: '您确定要擦亮此条订单吗？',
-                  success(res) {
-                        if (res.confirm) {
-                              wx.showLoading({
-                                    title: '正在擦亮'
-                              })
-                              db.collection('publish').doc(crash._id).update({
-                                    data: {
-                                          creat: new Date().getTime(),
-                                          dura: new Date().getTime() + 7 * (24 * 60 * 60 * 1000), //每次擦亮管7天
-                                    },
-                                    success() {
-                                          wx.hideLoading();
-                                          wx.showToast({
-                                                title: '成功擦亮',
-                                          })
-                                          that.getList();
-                                    },
-                                    fail() {
-                                          wx.hideLoading();
-                                          wx.showToast({
-                                                title: '操作失败',
-                                                icon: 'none'
-                                          })
-                                    }
-                              })
-                        }
-                  }
-            })
-      },
+      
       //跳转详情
       detail(e) {
             let that = this;
@@ -126,11 +98,12 @@ Page({
             })
       },
       //监测屏幕滚动
-      onPageScroll: function(e) {
+      onPageScroll(e) {
+            const pixelRatio = this.windowInfo.pixelRatio;
             this.setData({
-                  scrollTop: parseInt((e.scrollTop) * wx.getSystemInfoSync().pixelRatio)
-            })
-      },
+                scrollTop: parseInt((e.scrollTop) * pixelRatio)
+            });
+        },
       onReachBottom() {
             this.more();
       },
