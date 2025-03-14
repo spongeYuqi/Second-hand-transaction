@@ -152,12 +152,22 @@
       margin-bottom: 4rpx; /* 调整昵称与性别图标之间的距离 */
   }
   
-  .user_name {
+  .normal-name {
+      font-size: 25rpx;
+      letter-spacing: 2rpx;
+      /* border: 1px solid #ccc; */
+      padding: 3px;
+      border-radius: 8px;
+  }
+
+  .admin-name {
       font-size: 25rpx;
       letter-spacing: 2rpx;
       border: 1px solid #ccc;
       padding: 3px;
       border-radius: 8px;
+      background: #fbbd08;
+      color: #ffffff;
   }
 
   .contact {

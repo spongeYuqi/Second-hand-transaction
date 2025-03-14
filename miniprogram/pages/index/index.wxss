@@ -323,9 +323,17 @@
 }
 
 
-.nickname {
+.normal-nickname {
       font-size: 28rpx;
       color: #919191;
+}
+
+.admin-nickname {
+      font-size: 28rpx;
+      color: #ffffff;
+      background: #fbbd08;
+      border-radius: 10rpx;
+      padding: 0 10rpx;
 }
       
 

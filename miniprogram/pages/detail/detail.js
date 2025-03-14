@@ -58,6 +58,7 @@ Page({
               username: res.data.nickname,
               genderId: res.data.gender,
               avatarUrl: userInfo.info.avatarUrl, // 添加发布者的头像URL
+              isadmin: res.data._openid,
               isAuthor: app.openid === res.data._openid // 判断当前用户是否为发布者
             });
           }

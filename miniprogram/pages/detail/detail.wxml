@@ -25,7 +25,9 @@
                   <image lazy-load src="{{genderId==0?'/images/girl.png':'/images/boy.png'}}"></image>
             </view>
             <view class="des_box">
-                  <view class="user_name">{{username}}</view>
+                  <view class="{{isadmin == 'ol6n36_xtRPxfRrclkXGnNe-T4OY' ? 'admin-name' : 'normal-name'}}">
+                        {{username}}
+                  </view>
             </view>
       </view>
       <view class="contact">{{contactInfo}}</view>
