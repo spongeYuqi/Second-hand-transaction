@@ -132,6 +132,8 @@ Page({
                                           success: function(res) {
                                                 app.userinfo = res.data;
                                                 app.openid = res.data._openid;
+                                                // 添加这行代码来保存 openid 到本地存储
+                                                wx.setStorageSync('openid', res.data._openid);
                                                 wx.navigateBack({})
                                           },
                                     })
