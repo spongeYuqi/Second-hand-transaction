@@ -104,7 +104,7 @@ previewImage(e) {
     
       onShareAppMessage() {
             return {
-                  title: this.data.publishinfo.title + '，快来看看吧',
+                  title: '好物分享，快来看看吧',
                   path: '/pages/detail/detail?scene=' + this.data.publishinfo._id,
             }
       },
