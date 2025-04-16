@@ -1,6 +1,6 @@
 var data = {
       //云开发环境id
-      env: 'cloud1-2g1a3bn549ab3098',
+      env: 'cloud1-1gd7rsst6a6a545f',
       //分享配置
       share_title: '校园二手仓',
       share_img: '/images/sharehaoy.png', //可以是网络地址，本地文件路径要填绝对位置

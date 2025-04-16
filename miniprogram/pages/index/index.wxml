@@ -87,7 +87,7 @@
                                     <view class="user_info">
                                           <!-- <image class="avatar" lazy-load src="{{item.gender==0?'/images/girl.png':'/images/boy.png'}}"></image> -->
                                           <image class="avatar" mode="aspectFill" lazy-load src="{{item.touxiang || '/images/avator.png'}}" />
-                                          <view class="{{item._openid == 'ol6n36_xtRPxfRrclkXGnNe-T4OY' ? 'admin-nickname' : 'normal-nickname'}}">
+                                          <view class="{{item._openid == 'ofJNi7PO93SYI1cTNif3ltnTjJ-I' ? 'admin-nickname' : 'normal-nickname'}}">
                                                 {{item.nickname}}
                                           </view>
                                     </view>
